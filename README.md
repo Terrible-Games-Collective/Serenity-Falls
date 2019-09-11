@@ -10,6 +10,7 @@ Brennen Nelson, bsn495, 11240856
 
 Chrys Strenger, chs420, 11205413
 
+Antoni Jann Palazo, amp183, 11157723
 
 Github Link:
 https://github.com/tdskomar/CMPT-306-TGC
