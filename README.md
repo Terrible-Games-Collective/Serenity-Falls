@@ -12,6 +12,8 @@ Chrys Strenger, chs420, 11205413
 
 Antoni Jann Palazo, amp183, 11157723
 
+Leon Complido, lec559, 11209501
+
 Github Link:
 https://github.com/tdskomar/CMPT-306-TGC
 
