@@ -11,6 +11,9 @@ Brennen Nelson, bsn495, 11240856
 Chrys Strenger, chs420, 11205413
 
 
+Github Link:
+https://github.com/tdskomar/CMPT-306-TGC
 
 
+Game Idea:
 Top-down Horror Exploration Game
