@@ -1,4 +1,4 @@
-# CMPT-306-TGC
+# Terrible Game Collective
 CMPT 306 group project
 
 
