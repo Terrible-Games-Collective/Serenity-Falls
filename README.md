@@ -20,3 +20,7 @@ https://github.com/tdskomar/CMPT-306-TGC
 
 Game Idea:
 Top-down Horror Exploration Game
+
+
+Game Title:
+Serenity Falls
