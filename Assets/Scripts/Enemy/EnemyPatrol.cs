@@ -23,7 +23,8 @@ public class EnemyPatrol : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = Vector2.MoveTowards(transform.position, moveSpots[destinationSpot].position, moveSpeed * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position,
+            moveSpots[destinationSpot].position, moveSpeed * Time.deltaTime);
 
         if(Vector2.Distance(transform.position, moveSpots[destinationSpot].position) < 0.2f)
         {
