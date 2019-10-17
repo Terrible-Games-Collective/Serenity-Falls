@@ -5,7 +5,7 @@ using UnityEngine;
 public class FovDetection : MonoBehaviour
 {
     //Transform of target
-    public Transform Player;
+    public Transform Target;
     public float maxAngle;
 
     public float maxRadius;
@@ -27,22 +27,22 @@ public class FovDetection : MonoBehaviour
         //green if not seen red if seen
         if (!isInField)
         {
-            Gizmos.color = Color.green;
+            Gizmos.color = Color.cyan;
         }
         else
         {
             Gizmos.color = Color.red;
         }
-        Gizmos.DrawRay(transform.position, (Player.position - transform.position).normalized * maxRadius);
+        Gizmos.DrawRay(transform.position, (Target.position - transform.position).normalized * maxRadius);
 
-        Gizmos.color = Color.black;
-        Gizmos.DrawRay(transform.position, transform.up * maxRadius);
+        //Gizmos.color = Color.black;
+        //Gizmos.DrawRay(transform.position, transform.up * maxRadius);
     }
 
     //True if target is seen within FOV flase otherwise
     //MainEnemy: Object with FOV
     //Target: Object enemy is searching for
-    public static bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
+    public bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
     {
         //Grab all objects that overlap with the FOV Radius
         //if there is more then 100 items this could cause overflow
@@ -87,12 +87,17 @@ public class FovDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        isInField = inFieldView(transform, Player, maxAngle, maxRadius);
+        isInField = inFieldView(transform, Target, maxAngle, maxRadius);
     }
 
     // Update is called once per frame
     void Update()
     {
-        isInField = inFieldView(transform, Player, maxAngle, maxRadius);
+        isInField = inFieldView(transform, Target, maxAngle, maxRadius);
+    }
+
+    public bool IsInView()
+    {
+        return inFieldView(transform, Target, maxAngle, maxRadius);
     }
 }

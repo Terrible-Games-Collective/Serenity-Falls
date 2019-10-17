@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachineTools;
+using Pathfinding;
 
 public class EnemyPatrolState : State<PatrolAI>
 {
-
+    IAstarAI ai;
     private static EnemyPatrolState _instance;
 
     private float waitTimeCounter;
@@ -16,7 +17,6 @@ public class EnemyPatrolState : State<PatrolAI>
         {
             return;
         }
-
         _instance = this;
     }
 
@@ -37,7 +37,13 @@ public class EnemyPatrolState : State<PatrolAI>
     public override void EnterState(PatrolAI _owner)
     {
         //Debug.Log("Exiting Patrol State");
+        _owner.target = _owner.moveSpots[_owner.destinationSpot];
         waitTimeCounter = _owner.waitTime; //resets the waitTime
+        if(ai == null) {
+            ai = _owner.GetComponent<IAstarAI>();
+        }
+        ai.maxSpeed = _owner.patrolSpeed;
+
 
     }
 
@@ -54,14 +60,11 @@ public class EnemyPatrolState : State<PatrolAI>
         }
         else
         {
-            //Starts the movement towards the next move spot
-            _owner.transform.position = Vector2.MoveTowards(_owner.transform.position,
-                            _owner.moveSpots[_owner.destinationSpot].position, _owner.patrolSpeed * Time.deltaTime);
-
-
             //If the movespot was reached, wait the specified time before continuing
-            if (Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position) < 0.2f)
+            Debug.Log((Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position)).ToString());
+            if (Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position) < 0.5f)
             {
+                Debug.Log("Got here guys");
                 if (waitTimeCounter <= 0)
                 {
                     if (_owner.destinationSpot + 1 == _owner.moveSpots.Length)
@@ -70,11 +73,13 @@ public class EnemyPatrolState : State<PatrolAI>
                     }
                     _owner.destinationSpot++;
                     waitTimeCounter = _owner.waitTime;
+                    _owner.target = _owner.moveSpots[_owner.destinationSpot];
                 }
                 else
                 {
                     waitTimeCounter -= Time.deltaTime;
                 }
+
             }
         }
             

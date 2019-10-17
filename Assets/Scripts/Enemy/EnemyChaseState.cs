@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using StateMachineTools;
+using Pathfinding;
 
 public class EnemyChaseState : State<PatrolAI>
 {
@@ -9,7 +10,7 @@ public class EnemyChaseState : State<PatrolAI>
     private static EnemyChaseState _instance;
 
     private Transform target = null;
-
+    IAstarAI ai;
     private EnemyChaseState()
     {
         if (_instance != null)
@@ -43,8 +44,14 @@ public class EnemyChaseState : State<PatrolAI>
             //get target to chase based off of their tag
             target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
         }
-        
-        
+        if (ai == null)
+        {
+            ai = _owner.GetComponent<IAstarAI>();
+        }
+        _owner.target = target.transform;
+        ai.maxSpeed = _owner.chaseSpeed;
+
+
     }
 
     public override void ExitState(PatrolAI _owner)
@@ -61,7 +68,8 @@ public class EnemyChaseState : State<PatrolAI>
         else
         {
             //update location based off of target position
-           _owner.transform.position = Vector2.MoveTowards(_owner.transform.position, target.position, _owner.chaseSpeed * Time.deltaTime);
+            //_owner.transform.position = Vector2.MoveTowards(_owner.transform.position, target.position, _owner.chaseSpeed * Time.deltaTime);
+            _owner.target = target.transform;
         }
     }
 
