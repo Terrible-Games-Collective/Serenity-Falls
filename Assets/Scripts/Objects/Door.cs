@@ -5,6 +5,7 @@ using UnityEngine;
 public enum DoorType
 {
     normal,
+    blocked,
     locked
 }
 public class Door : Interactable
@@ -14,6 +15,13 @@ public class Door : Interactable
     public bool isOpen;
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
+    public Signal KeySignal;
+
+    // blocked door
+    public float cooldown;
+    public float cooldownTimer;
+
+    // animation
     private Animator anim;
 
     // for locked doors
@@ -32,9 +40,10 @@ public class Door : Interactable
             }
             else
             {
-                if (thisDoorType == DoorType.locked && playerInventory.Key)
+                if ((thisDoorType == DoorType.locked) && (playerInventory.Key == 3))
                 {
-                    playerInventory.Key = false;
+                    playerInventory.Key -= 3;
+                    KeySignal.Raise();
                     thisDoorType = DoorType.normal;
                     Open();
                 }
@@ -44,6 +53,23 @@ public class Door : Interactable
                 }
             }
         }
+        // Main monster blocking the door
+        // for now player does this
+        else if (Input.GetKeyDown(KeyCode.B) && playerInRange)
+        {
+            cooldownTimer = cooldown;
+            // if the door open to begin with
+            if (isOpen)
+            {
+                Close();
+            }
+            if (thisDoorType == DoorType.normal)
+            {
+                thisDoorType = DoorType.blocked;
+            }
+
+        }
+        BlockedDoorCooldown();
     }
     public void Open()
     {
@@ -57,6 +83,20 @@ public class Door : Interactable
         isOpen = false;
         anim.SetBool("opened", false);
         physicsCollider.enabled = true;
+    }
+
+    public void BlockedDoorCooldown()
+    { 
+        
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+        if (cooldownTimer < 0)
+        {
+            cooldownTimer = 0;
+            thisDoorType = DoorType.normal;
+        }
     }
 
 }

@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 5685808971285401889}
   - component: {fileID: 5685808971285401902}
   m_Layer: 0
-  m_Name: Normal Door
-  m_TagString: Untagged
+  m_Name: Door
+  m_TagString: Interactables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5685808971285401893}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.217, y: 0.072, z: 0}
-  m_LocalScale: {x: 1.087, y: 1.052, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -60,6 +60,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -72,12 +73,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 120a055dd6754b54ab163652b1019b96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 06f0488d7f929f14aba3a9890497285a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5, y: 5}
+  m_Size: {x: 6, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,18 +97,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2, y: 0.065797806}
+  m_Offset: {x: -0.015576363, y: -0.025442123}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 5, y: 5}
+    oldSize: {x: 6, y: 3}
+    newSize: {x: 6, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.48121452, y: 4.0342903}
+  m_Size: {x: 5.909872, y: 2.02705}
   m_EdgeRadius: 0
 --- !u!61 &5685808971285401903
 BoxCollider2D:
@@ -122,18 +123,18 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -2.01448, y: 0.082436085}
+  m_Offset: {x: -0.017048955, y: -0.022740126}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5, y: 5}
-    newSize: {x: 5, y: 5}
+    oldSize: {x: 6, y: 3}
+    newSize: {x: 6, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.603827, y: 3.9283342}
+  m_Size: {x: 3.979408, y: 4.8694196}
   m_EdgeRadius: 0
 --- !u!95 &5685808971285401889
 Animator:
@@ -166,7 +167,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2604feaeb049f6449ec9e21d8a4ba8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  context: {fileID: 0}
   contextOn: {fileID: 11400000, guid: 50c313be7cf44064799e1ee7b85ade28, type: 2}
   contextOff: {fileID: 11400000, guid: 88b658ec4f4bd9e4ea4a04f3d464175d, type: 2}
   playerInRange: 0
@@ -174,3 +174,7 @@ MonoBehaviour:
   isOpen: 0
   doorSprite: {fileID: 5685808971285401891}
   physicsCollider: {fileID: 5685808971285401890}
+  KeySignal: {fileID: 11400000, guid: d1a104a3c51d3fa44ba27b01fbe5106a, type: 2}
+  cooldown: 5
+  cooldownTimer: 0
+  playerInventory: {fileID: 11400000, guid: f69336d1a5867ea4eaa773c037bea51e, type: 2}

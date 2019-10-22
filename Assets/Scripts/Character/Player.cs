@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public Inventory PlayerInventory;
     void Start()
     {
-        PlayerInventory.Key = false;
+        PlayerInventory.Key = 0;
     }
 
     // Update is called once per frame

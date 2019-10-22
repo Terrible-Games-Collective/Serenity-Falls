@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fa62eaf6c41358449ec0fe1d37696fb, type: 3}
   m_Name: PlayerInventory
   m_EditorClassIdentifier: 
-  key: 0
+  Key: 0

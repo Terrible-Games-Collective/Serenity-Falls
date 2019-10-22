@@ -5,6 +5,6 @@ using UnityEngine;
 [CreateAssetMenu]
 public class Inventory : ScriptableObject
 {
-    public bool Key;
+    public int Key;
 
 }

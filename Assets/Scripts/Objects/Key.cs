@@ -8,6 +8,7 @@ public class Key : Interactable
     public SpriteRenderer keySprite;
     public BoxCollider2D triggerCollider;
     public CircleCollider2D keyCollider;
+    public Signal KeyListener;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,8 @@ public class Key : Interactable
     }
     public void GetKey()
     {
-        playerInventory.Key = true;
+        playerInventory.Key += 1;
+        KeyListener.Raise();
         keySprite.enabled = false;
         triggerCollider.enabled = false;
         keyCollider.enabled = false;
