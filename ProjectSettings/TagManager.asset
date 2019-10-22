@@ -40,6 +40,18 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 1390780101
+    locked: 0
+  - name: Floor
+    uniqueID: 3478389679
+    locked: 0
+  - name: Walls
+    uniqueID: 62476259
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: MovePoints
+    uniqueID: 2527891641
     locked: 0
