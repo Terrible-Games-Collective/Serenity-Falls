@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Flashlight
   - Battery
+  - moveSpots
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -18,9 +20,9 @@ TagManager:
   - Light Obstacles
   - Light Sources
   - Ambient Light
-  - 
-  - 
-  - 
+  - Walls
+  - Move Points
+  - Floors
   - 
   - 
   - 
