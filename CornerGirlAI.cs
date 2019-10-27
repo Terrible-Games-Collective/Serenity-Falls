@@ -9,8 +9,9 @@ public class CornerGirlAI : MonoBehaviour
     Rigidbody2D girlBd;
     Transform girlTrans;
     float girlWidth;
-    bool detection = false;
+    public bool detection = false;
     bool firstDetection = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,6 @@ public class CornerGirlAI : MonoBehaviour
 
     }
 
-   
     void FixedUpdate()
     {
         if(detection)
@@ -52,5 +52,12 @@ public class CornerGirlAI : MonoBehaviour
         Vector2 girlVel = girlBd.velocity;
         girlVel.x = speed;
         girlBd.velocity = girlVel;
+    }
+
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Entered Corner Girl Trigger");
+        detection = true;
     }
 }
