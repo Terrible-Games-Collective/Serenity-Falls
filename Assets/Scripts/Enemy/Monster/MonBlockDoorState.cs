@@ -5,13 +5,13 @@ using UnityEngine;
 using StateMachineTools;
 using Pathfinding;
 
-public class MonDoorBlockState : State<MonsterAI>
+public class MonBlockDoorState : State<MonsterAI>
 {
 
     //State Initialization ***************************
-    private static MonDoorBlockState _instance;
+    private static MonBlockDoorState _instance;
 
-    private MonDoorBlockState()
+    private MonBlockDoorState()
     {
         if (_instance != null)
         {
@@ -22,13 +22,13 @@ public class MonDoorBlockState : State<MonsterAI>
     }
 
     //If no instance exists, create one
-    public static MonDoorBlockState Instance
+    public static MonBlockDoorState Instance
     {
         get
         {
             if (_instance == null)
             {
-                new MonDoorBlockState();
+                new MonBlockDoorState();
             }
 
             return _instance;

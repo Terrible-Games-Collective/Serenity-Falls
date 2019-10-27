@@ -8,7 +8,7 @@ public class MonsterAI : MonoBehaviour
 {
 
     //Enum to keep track of state
-    enum MonsterState { Idle, Stalk, Stunned, DoorBlock,  BreakerSwitch, SpawnMinion, KillMode };
+    enum MonsterState { Idle, Stalk, Stunned, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
     MonsterState currentState;
 
     public StateMachine<MonsterAI> stateMachine { get; set; }//Instance of the StateMachine class
