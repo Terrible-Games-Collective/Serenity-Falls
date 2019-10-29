@@ -52,14 +52,14 @@ public class HidePlayer : Interactable
         isHiding = false;
         player.transform.position = prevPos;
         player.SetActive(true);
-        cam.orthographicSize = 5;
+        cam.orthographicSize = 10;
     }
 
     public void MonsterCatch()
     {
         isHiding = false;
         player.SetActive(true);
-        cam.orthographicSize = 5;     
+        cam.orthographicSize = 10;     
         // player dead
     }
 }
