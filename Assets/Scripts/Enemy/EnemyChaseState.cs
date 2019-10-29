@@ -37,7 +37,7 @@ public class EnemyChaseState : State<PatrolAI>
 
     public override void EnterState(PatrolAI _owner)
     {
-        //Debug.Log("Entering Chase State");
+        Debug.Log("Entering Chase State");
 
         if (target == null)
         {
@@ -61,16 +61,10 @@ public class EnemyChaseState : State<PatrolAI>
 
     public override void UpdateState(PatrolAI _owner)
     {
-        if (!_owner.chasePlayer)
-        {
-            _owner.stateMachine.ChangeState(EnemyPatrolState.Instance); //change state if needed
-        }
-        else
-        {
             //update location based off of target position
             //_owner.transform.position = Vector2.MoveTowards(_owner.transform.position, target.position, _owner.chaseSpeed * Time.deltaTime);
             _owner.target = target.transform;
-        }
+
     }
 
 }

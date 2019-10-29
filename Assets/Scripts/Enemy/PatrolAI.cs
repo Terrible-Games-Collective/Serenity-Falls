@@ -14,6 +14,7 @@ public class PatrolAI : MonoBehaviour
     public int destinationSpot = 0; //The index of the initial patrol target in moveSpots
     public Transform target;
 
+
     //Used by chase state
     public float chaseSpeed;        //The speed to chase the player
 
@@ -21,6 +22,7 @@ public class PatrolAI : MonoBehaviour
     private float gameTimer;
     private int seconds = 0;
     public int stateSeconds;
+    private string currentState;
 
     FovDetection fov;
     public IAstarAI ai;
@@ -39,6 +41,7 @@ public class PatrolAI : MonoBehaviour
         stateMachine = new StateMachine<PatrolAI>(this);
         fov = GetComponent<FovDetection>();
         stateMachine.ChangeState(EnemyPatrolState.Instance);
+        currentState = "patrol";
         gameTimer = Time.time;
         ai = GetComponent<IAstarAI>();
         // Update the destination right before searching for a path as well.
@@ -70,12 +73,13 @@ public class PatrolAI : MonoBehaviour
         //    seconds = 0;
         //    chasePlayer = !chasePlayer;
         //}
-        if (fov.IsInView())
+        if (currentState != "chase" && fov.IsInView())
         {
-            chasePlayer = true;
-        } else
-        {
-            chasePlayer = false;
+            currentState = "chase";
+            stateMachine.ChangeState(EnemyChaseState.Instance);
+        } else if (currentState != "patrol") {
+            currentState = "patrol";
+            stateMachine.ChangeState(EnemyPatrolState.Instance);
         }
         ai.destination = target.position;
         stateMachine.Update();

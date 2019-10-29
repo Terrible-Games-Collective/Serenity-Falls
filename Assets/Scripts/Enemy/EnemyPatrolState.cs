@@ -8,7 +8,6 @@ public class EnemyPatrolState : State<PatrolAI>
 {
     IAstarAI ai;
     private static EnemyPatrolState _instance;
-
     private float waitTimeCounter;
 
     private EnemyPatrolState()
@@ -52,37 +51,25 @@ public class EnemyPatrolState : State<PatrolAI>
         //Debug.Log("Exiting Patrol State");
     }
 
-    public override void UpdateState(PatrolAI _owner)
-    {
-        if (_owner.chasePlayer)
-        {
-            _owner.stateMachine.ChangeState(EnemyChaseState.Instance); //change state if needed
-        }
-        else
-        {
-            //If the movespot was reached, wait the specified time before continuing
-            Debug.Log((Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position)).ToString());
-            if (Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position) < 0.5f)
+    public override void UpdateState(PatrolAI _owner) {
+        if (Vector2.Distance(_owner.transform.position, _owner.moveSpots[_owner.destinationSpot].position) < 0.5f) 
+         {
+            if (waitTimeCounter <= 0) 
             {
-                Debug.Log("Got here guys");
-                if (waitTimeCounter <= 0)
+                if (_owner.destinationSpot + 1 == _owner.moveSpots.Length) 
                 {
-                    if (_owner.destinationSpot + 1 == _owner.moveSpots.Length)
-                    {
-                        _owner.destinationSpot = -1;
-                    }
-                    _owner.destinationSpot++;
-                    waitTimeCounter = _owner.waitTime;
-                    _owner.target = _owner.moveSpots[_owner.destinationSpot];
+                    _owner.destinationSpot = -1;
                 }
-                else
-                {
-                    waitTimeCounter -= Time.deltaTime;
-                }
-
+                _owner.destinationSpot++;
+                waitTimeCounter = _owner.waitTime;
+                _owner.target = _owner.moveSpots[_owner.destinationSpot];
+            } 
+            else 
+            {
+                waitTimeCounter -= Time.deltaTime;
             }
+
         }
-            
     }
 
 }
