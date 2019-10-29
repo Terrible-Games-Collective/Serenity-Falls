@@ -8,7 +8,7 @@ public class MonsterAI : MonoBehaviour
 {
     //State Machine Stuff****************
     //Enum to keep track of state
-    public enum MonsterState { Idle, Stalk, Stunned, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
+    public enum MonsterState { Idle, Stunned, Stalk, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
     public MonsterState currentState;
 
     public StateMachine<MonsterAI> stateMachine { get; set; }//Instance of the StateMachine class
@@ -44,15 +44,15 @@ public class MonsterAI : MonoBehaviour
         stateMachine.Update();
     }
 
-    //Set interupt to true if you want the monster to stop what it is doing and go to the next state
-    public void GoToNextState(bool interupt = false)
+    //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
+    public void GoToNextState(bool forceTransition = false)
     {
         MonsterState nextState = DecideNextState();
 
-        //If interupt is true and the current state is deemed the best state the monster will
-        //enter it's current state again, if interupt is false and the current state is the best
+        //If forceTransition is true and the current state is deemed the best state the monster will
+        //enter it's current state again, if forceTransition is false and the current state is the best
         //it will continue what it is doing
-        if (nextState == currentState && !interupt) 
+        if (nextState == currentState && !forceTransition) 
         {
             return;
         }
@@ -75,9 +75,6 @@ public class MonsterAI : MonoBehaviour
             case MonsterState.Stalk:
                 stateMachine.ChangeState(MonStalkState.Instance);
                 break;
-            case MonsterState.Stunned:
-                stateMachine.ChangeState(MonStunnedState.Instance);
-                break;
             case MonsterState.Idle:
                 stateMachine.ChangeState(MonIdleState.Instance);
                 break;
@@ -99,6 +96,13 @@ public class MonsterAI : MonoBehaviour
 
 
         return MonsterState.Idle;
+    }
+
+
+    //Called by player when monster is in fov
+    private void  ApplyStun()
+    { 
+         stateMachine.ChangeState(MonStunnedState.Instance); 
     }
 
 }
