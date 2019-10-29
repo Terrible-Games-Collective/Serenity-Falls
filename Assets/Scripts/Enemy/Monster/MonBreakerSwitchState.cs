@@ -40,7 +40,7 @@ public class MonBreakerSwitchState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        _owner.currentState = MonsterAI.MonsterState.BreakerSwitch;
     }
 
     public override void ExitState(MonsterAI _owner)

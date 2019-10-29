@@ -37,11 +37,19 @@ public class MonIdleState : State<MonsterAI>
     //*************************************************
 
 
+    private float idleTimer;
+    private int seconds = 0;
+
+    
+
+
 
     public override void EnterState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
-    }
+        _owner.currentState = MonsterAI.MonsterState.Idle;
+        idleTimer = Time.time;
+         
+}
 
     public override void ExitState(MonsterAI _owner)
     {
@@ -50,6 +58,18 @@ public class MonIdleState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        //waits until idleSeconds has passed before trying to switch states
+        if (Time.time > idleTimer + 1)
+        {
+            idleTimer = Time.time;
+            seconds++;
+            //Debug.Log(seconds);
+        }
+
+        if (seconds == _owner.idleSeconds)
+        {
+            seconds = 0;
+            _owner.GoToNextState();
+        }
     }
 }
