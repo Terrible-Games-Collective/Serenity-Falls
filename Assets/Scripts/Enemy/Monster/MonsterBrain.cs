@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class MonsterBrain : MonoBehaviour
 {
 
@@ -13,22 +11,38 @@ public class MonsterBrain : MonoBehaviour
     private GameObject[] key2Doors;
     [SerializeField]
     private GameObject[] key3Doors;
+
     [SerializeField]
     private GameObject[] allKeys;
 
 
+    public struct monster_manager
+    {
+        public List<GameObject> key1UnblockedDoors;
+        public List<GameObject> key2UnblockedDoors;
+        public List<GameObject> key3UnblockedDoors;
+        public List<GameObject> key1BlockedDoors;
+        public List<GameObject> key2BlockedDoors;
+        public List<GameObject> key3BlockedDoors;
 
-    //Monsters brain data
-    protected List<GameObject> key1UnblockedDoors;
-    protected List<GameObject> key2UnblockedDoors;
-    protected List<GameObject> key3UnblockedDoors;
-    protected List<GameObject> key1BlockedDoors;
-    protected List<GameObject> key2BlockedDoors;
-    protected List<GameObject> key3BlockedDoors;
-    protected List<GameObject> remainingKeys;
-    protected int blockedDoors;
+        public List<GameObject> key1MinionSpawns;
+        public List<GameObject> key2MinionSpawns;
+        public List<GameObject> key3MinionSpawns;
+
+        public List<GameObject> remainingKeys;
+
+        public int blockedDoors;
+        public int minionsSpawned;
+
+        public bool breakerOn;
 
 
+    }
+
+
+
+
+    public monster_manager monster_brain = new monster_manager();
 
 
 
@@ -40,34 +54,25 @@ public class MonsterBrain : MonoBehaviour
        
         foreach (GameObject door in key1Doors)
         {
-            key1UnblockedDoors.Add(door);
+            monster_brain.key1UnblockedDoors.Add(door);
         }
 
         foreach (GameObject door in key2Doors)
         {
-            key2UnblockedDoors.Add(door);
+            monster_brain.key2UnblockedDoors.Add(door);
         }
 
         foreach (GameObject door in key3Doors)
         {
-            key3UnblockedDoors.Add(door);
+            monster_brain.key3UnblockedDoors.Add(door);
         }
 
 
 
         foreach (GameObject key in allKeys)
         {
-            remainingKeys.Add(key);
+            monster_brain.remainingKeys.Add(key);
         }
-
-
-
-
-        Debug.Log("Key 1 Doors: " + key1UnblockedDoors.Count);
-        Debug.Log("Key 2 Doors: " + key2UnblockedDoors.Count);
-        Debug.Log("Key 3 Doors: " + key3UnblockedDoors.Count);
-
-        Debug.Log("Keys: " + remainingKeys.Count);
 
     }
 
