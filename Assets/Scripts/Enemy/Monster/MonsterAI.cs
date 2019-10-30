@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using StateMachineTools;
 using Pathfinding;
 
@@ -99,41 +100,41 @@ public class MonsterAI : MonoBehaviour
     }
 
     private MonsterState DecideNextState() {
-        if (monsterBrain.remainingKeys.Count == 3) {
-            if(monsterBrain.blockedDoors < 3) {
-                return MonsterState.BlockDoor;
-            }
-            return MonsterState.Stalk;
-        }
+        //if (monsterBrain.remainingKeys.Count == 3) {
+        //    if(monsterBrain.blockedDoors < 3) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
+        //}
 
-        if(monsterBrain.remainingKeys.Count == 2) {
-            if (monsterBrain.breakerOn) {
-                return MonsterState.BreakerSwitch;
-            }
-            else if(monsterBrain.blockedDoors < 4) {
-                return MonsterState.BlockDoor;
-            }
-            return MonsterState.Stalk;
-        }
+        //if(monsterBrain.remainingKeys.Count == 2) {
+        //    if (monsterBrain.breakerOn) {
+        //        return MonsterState.BreakerSwitch;
+        //    }
+        //    else if(monsterBrain.blockedDoors < 4) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
+        //}
 
-        if(monsterBrain.remainingKeys.Count == 1) {
-            if (monsterBrain.breakerOn) {
-                return MonsterState.BreakerSwitch;
-            }
-            else if (monsterBrain.minionsSpawned < monsterBrain.maxMinions) {
-                return MonsterState.SpawnMinion;
-            }
-            else if (monsterBrain.blockedDoors < 4) {
-                return MonsterState.BlockDoor;
-            }
-            return MonsterState.Stalk;
-        }
+        //if(monsterBrain.remainingKeys.Count == 1) {
+        //    if (monsterBrain.breakerOn) {
+        //        return MonsterState.BreakerSwitch;
+        //    }
+        //    else if (monsterBrain.minionsSpawned < monsterBrain.maxMinions) {
+        //        return MonsterState.SpawnMinion;
+        //    }
+        //    else if (monsterBrain.blockedDoors < 4) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
+        //}
 
-        if(monsterBrain.remainingKeys.Count == 0) {
-            return MonsterState.KillMode;
-        }
+        //if(monsterBrain.remainingKeys.Count == 0) {
+        //    return MonsterState.KillMode;
+        //}
 
-        return MonsterState.Idle;
+        return MonsterState.Stalk;
     }
 
 
@@ -141,6 +142,14 @@ public class MonsterAI : MonoBehaviour
     private void  ApplyStun()
     { 
          stateMachine.ChangeState(MonStunnedState.Instance); 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
 }
