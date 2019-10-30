@@ -5,13 +5,30 @@ using UnityEngine;
 public class CornerGirlAI : MonoBehaviour
 {
     public LayerMask enemyMask;
-    public float speed = 0;
+    public float speed = 1;
     Rigidbody2D girlBd;
     Transform girlTrans;
     float girlWidth;
-    public bool detection = false;
+
+    public bool detected = false;
     bool firstDetection = false;
 
+    void detectAction()
+    {
+        if (!firstDetection)
+        {
+            firstDetection = true;
+        }
+
+        speed = speed + 0.5f;
+
+
+        Vector2 girlVel = girlBd.velocity;
+        girlVel.x = speed;
+        girlBd.velocity = girlVel;
+
+
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -25,39 +42,27 @@ public class CornerGirlAI : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(detection)
-        {
-            if(!firstDetection)
-            {
-                firstDetection = true;
-            }
-
-            speed = speed + 0.5f;
-        }
-
         //Vector to determine if girl is against a wall
         Vector2 lineCastPos = girlTrans.position - girlTrans.right * girlWidth;
         Debug.DrawLine(lineCastPos, lineCastPos + Vector2.right);
         bool isAgainstWall = Physics2D.Linecast(lineCastPos, lineCastPos + Vector2.right, enemyMask);
 
-        //if against a wall
+        if(detected)
+        {
+            detectAction();
+        }
+
+        //if against a wall        
         if(isAgainstWall)
         {
             //stop moving, no longer detected
             speed = 0;
-            detection = false;
+            detected = false;
         }
 
         //movement for enemy when activated
         Vector2 girlVel = girlBd.velocity;
         girlVel.x = speed;
         girlBd.velocity = girlVel;
-    }
-
-
-    private void OnTriggerEnter(Collider other)
-    {
-        Debug.Log("Entered Corner Girl Trigger");
-        detection = true;
     }
 }

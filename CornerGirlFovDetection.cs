@@ -9,6 +9,8 @@ public class CornerGirlFovDetection : MonoBehaviour
     public Transform Target;
     public float maxAngle;
 
+    public GameObject myCornerGirl; 
+
     public float maxRadius;
 
     private bool isInField;
@@ -75,10 +77,8 @@ public class CornerGirlFovDetection : MonoBehaviour
                         //if false an object is in the way
                         if (hit.transform == target)
                         {
+                            
                             return true;
-                            CornerGirlAI cornerAI = GetComponent<CornerGirlAI>();
-                            cornerAI.detection = true;
-
                         }
                     }
                 }
