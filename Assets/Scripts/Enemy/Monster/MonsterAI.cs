@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using StateMachineTools;
 using Pathfinding;
 
@@ -18,6 +19,14 @@ public class MonsterAI : MonoBehaviour
 
     public Transform target;
     public int idleSeconds;
+
+    private float startTime;
+    public float timeBetweenStates;
+
+    public float chaseSpeed;
+    public float killModeSpeed;
+
+    protected MonsterBrain.monster_manager monsterBrain;
    
 
 
@@ -26,8 +35,10 @@ public class MonsterAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startTime = Time.fixedUnscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
+        monsterBrain = GetComponent<MonsterBrain>().monster_brain;
 
 
 
@@ -37,11 +48,18 @@ public class MonsterAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Time.fixedUnscaledTime - startTime > timeBetweenStates) {
+            GoToNextState();
+            startTime = Time.fixedUnscaledTime;
+        }
 
 
         ai.destination = target.position;
         stateMachine.Update();
+    }
+
+    public MonsterBrain.monster_manager GetMonster_Manager() {
+        return monsterBrain;
     }
 
     //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
@@ -81,21 +99,42 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    private MonsterState DecideNextState()
-    {
-        //Use if statements to examine the game state and decide what to do
-
-        //if (remainingKeys.count == 0)
-        //{
-        //return MonsterState.KillMode;
+    private MonsterState DecideNextState() {
+        //if (monsterBrain.remainingKeys.Count == 3) {
+        //    if(monsterBrain.blockedDoors < 3) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
         //}
 
-       
+        //if(monsterBrain.remainingKeys.Count == 2) {
+        //    if (monsterBrain.breakerOn) {
+        //        return MonsterState.BreakerSwitch;
+        //    }
+        //    else if(monsterBrain.blockedDoors < 4) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
+        //}
 
+        //if(monsterBrain.remainingKeys.Count == 1) {
+        //    if (monsterBrain.breakerOn) {
+        //        return MonsterState.BreakerSwitch;
+        //    }
+        //    else if (monsterBrain.minionsSpawned < monsterBrain.maxMinions) {
+        //        return MonsterState.SpawnMinion;
+        //    }
+        //    else if (monsterBrain.blockedDoors < 4) {
+        //        return MonsterState.BlockDoor;
+        //    }
+        //    return MonsterState.Stalk;
+        //}
 
+        //if(monsterBrain.remainingKeys.Count == 0) {
+        //    return MonsterState.KillMode;
+        //}
 
-
-        return MonsterState.Idle;
+        return MonsterState.Stalk;
     }
 
 
@@ -103,6 +142,14 @@ public class MonsterAI : MonoBehaviour
     private void  ApplyStun()
     { 
          stateMachine.ChangeState(MonStunnedState.Instance); 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
 }

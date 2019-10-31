@@ -7,7 +7,8 @@ using Pathfinding;
 
 public class MonStalkState : State<MonsterAI>
 {
-
+    IAstarAI ai;
+    private Transform target;
     //State Initialization ***************************
     private static MonStalkState _instance;
 
@@ -41,6 +42,17 @@ public class MonStalkState : State<MonsterAI>
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.Stalk;
+        if (target == null)
+        {
+            //get target to chase based off of their tag
+            target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+        }
+        if (ai == null)
+        {
+            ai = _owner.GetComponent<IAstarAI>();
+        }
+        _owner.target = target.transform;
+        ai.maxSpeed = _owner.killModeSpeed;
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -50,6 +62,6 @@ public class MonStalkState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        _owner.target = target.transform;
     }
 }

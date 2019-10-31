@@ -31,8 +31,10 @@ public class MonsterBrain : MonoBehaviour
 
         public List<GameObject> remainingKeys;
 
+        public int keysLeft;
         public int blockedDoors;
         public int minionsSpawned;
+        public int maxMinions;
 
         public bool breakerOn;
 
@@ -50,7 +52,7 @@ public class MonsterBrain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        monster_brain.remainingKeys = new List<GameObject>();
        
         foreach (GameObject door in key1Doors)
         {
