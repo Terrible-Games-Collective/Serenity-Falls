@@ -52,7 +52,7 @@ public class MonStalkState : State<MonsterAI>
             ai = _owner.GetComponent<IAstarAI>();
         }
         _owner.target = target.transform;
-        ai.maxSpeed = _owner.killModeSpeed;
+        ai.maxSpeed = _owner.chaseSpeed;
     }
 
     public override void ExitState(MonsterAI _owner)
