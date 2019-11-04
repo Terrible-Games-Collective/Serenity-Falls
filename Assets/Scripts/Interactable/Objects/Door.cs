@@ -58,6 +58,7 @@ public class Door : Interactable
         else if (Input.GetKeyDown(KeyCode.B) && playerInRange && thisDoorType != DoorType.locked)
         {
             cooldownTimer = cooldown;
+            doorSprite.color = Color.red;
             // if the door open to begin with
             if (isOpen)
             {
@@ -96,6 +97,16 @@ public class Door : Interactable
         {
             cooldownTimer = 0;
             thisDoorType = DoorType.normal;
+            if (playerInRange)
+            {
+                item.color = Color.green;
+            }
+            else
+            {
+                item.color = Color.white;
+            }
+            
+
         }
     }
 

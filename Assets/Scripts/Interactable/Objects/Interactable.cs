@@ -27,7 +27,11 @@ public class Interactable : MonoBehaviour
 
             contextOn.Raise();
             playerInRange = true;
-            item.color = Color.green;
+            if (item.color != Color.red)
+            {
+                item.color = Color.green;
+            }
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -36,7 +40,11 @@ public class Interactable : MonoBehaviour
         {
             contextOff.Raise();
             playerInRange = false;
-            item.color = Color.white;
+            if (item.color != Color.red)
+            {
+                item.color = Color.white;
+            }
+            
         }
     }
 }
