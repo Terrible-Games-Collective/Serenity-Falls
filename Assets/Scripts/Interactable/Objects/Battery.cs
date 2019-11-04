@@ -14,7 +14,7 @@ public class Battery : Interactable
     
     public SpriteRenderer keySprite;
     public CircleCollider2D triggerCollider;
-    public BoxCollider2D batteryCollider;
+    public EdgeCollider2D batteryCollider;
     // Start is called before the first frame update
     void Start()
     {

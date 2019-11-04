@@ -62,4 +62,5 @@ public class HidePlayer : Interactable
         cam.orthographicSize = 10;     
         // player dead
     }
+
 }
