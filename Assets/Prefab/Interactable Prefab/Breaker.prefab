@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7004672348413783871}
   m_Layer: 0
   m_Name: Breaker
-  m_TagString: Untagged
+  m_TagString: Interactables
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -149,9 +149,6 @@ MonoBehaviour:
   contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
   contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
   playerInRange: 0
-  lights:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  item: {fileID: 7004672348413783869}
+  MapLighting: {fileID: 0}
+  MainLights: {fileID: 0}

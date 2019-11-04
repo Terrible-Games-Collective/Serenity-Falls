@@ -169,6 +169,7 @@ MonoBehaviour:
   contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
   contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
   playerInRange: 0
+  item: {fileID: 5685808971285401891}
   thisDoorType: 0
   isOpen: 0
   doorSprite: {fileID: 5685808971285401891}

@@ -6,11 +6,11 @@ using UnityEngine.UI;
 public class AreaUI : MonoBehaviour
 {
     public Text AreaText;
-    public GameObject area;
+    public Area PlayerArea;
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartArea();
     }
 
     // Update is called once per frame
@@ -20,5 +20,10 @@ public class AreaUI : MonoBehaviour
     }
     public void StartArea()
     {
+        AreaText.text = PlayerArea.Name;
+    }
+    public void UpdateArea()
+    {
+        AreaText.text = PlayerArea.Name;
     }
 }
