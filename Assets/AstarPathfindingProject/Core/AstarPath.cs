@@ -834,7 +834,8 @@ public class AstarPath : VersionedMonoBehaviour {
 			} else if (path.error) {
 				Debug.LogWarning(debug);
 			} else {
-				Debug.Log(debug);
+                //Commented out because it clutters the console
+				//Debug.Log(debug);
 			}
 		}
 	}
