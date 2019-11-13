@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Sector : MonoBehaviour
 {
+    public int sectorID;
+
     public Transform[] NursePathSpots;
     public GameObject nurse;
 
-    public GameObject[] sectorRooms;
+    
 
     public bool containsKey;
 
-
+    public GameObject[] sectorRooms;
     public int playerRoomID;
     public bool containsPlayer;
+
 
 
 
@@ -41,7 +44,7 @@ public class Sector : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("entered Sector 0");
+            Debug.Log("entered Sector " + sectorID);
         }
     }
 
@@ -49,7 +52,7 @@ public class Sector : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("exited Sector 0");
+            Debug.Log("exited Sector " + sectorID);
         }
     }
 
