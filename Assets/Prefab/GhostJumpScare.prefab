@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7048763232358612709}
   - component: {fileID: 2805714092925857008}
   - component: {fileID: 6549256232435337975}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: GhostJumpScare
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 126
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

@@ -139,6 +139,7 @@ MonoBehaviour:
   ghostTrans: {fileID: 0}
   scareEffect: {fileID: 1264862768999555645, guid: dbf7b6f250b08b2458daf5ea655dee7f,
     type: 3}
+  target: {fileID: 8782955186894696686, guid: 0283072712cf7e64d87538ca6395f63a, type: 3}
 --- !u!82 &2320186074025712416
 AudioSource:
   m_ObjectHideFlags: 0
