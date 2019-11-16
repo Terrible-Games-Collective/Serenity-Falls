@@ -20,14 +20,15 @@ public class MonsterAI : MonoBehaviour
     public Transform target;
     public int idleSeconds;
 
-    private float startTime;
-    public float timeBetweenStates;
-
     public float chaseSpeed;
     public float killModeSpeed;
 
     protected MonsterBrain.monster_manager monsterBrain;
-   
+
+    private float startStateTime;
+    public int stateChangeInterval = 30;
+    private bool searching;
+
 
 
 
@@ -35,7 +36,7 @@ public class MonsterAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startTime = Time.fixedUnscaledTime;
+        startStateTime = Time.fixedUnscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
         monsterBrain = GetComponent<MonsterBrain>().monster_brain;
@@ -48,9 +49,9 @@ public class MonsterAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.fixedUnscaledTime - startTime > timeBetweenStates) {
+        if(Time.fixedUnscaledTime - startStateTime > stateChangeInterval) {
             GoToNextState();
-            startTime = Time.fixedUnscaledTime;
+            startStateTime = Time.fixedUnscaledTime;
         }
 
 
@@ -137,12 +138,6 @@ public class MonsterAI : MonoBehaviour
         return MonsterState.Stalk;
     }
 
-
-    //Called by player when monster is in fov
-    private void  ApplyStun()
-    { 
-         stateMachine.ChangeState(MonStunnedState.Instance); 
-    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {

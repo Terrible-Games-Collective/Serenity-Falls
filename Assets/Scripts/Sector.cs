@@ -8,13 +8,13 @@ public class Sector : MonoBehaviour
 
     public Transform[] NursePathSpots;
     public GameObject nurse;
-
+    private MonsterBrain monsterBrain;
     
 
     public bool containsKey;
 
     public GameObject[] sectorRooms;
-    public int playerRoomID;
+    public Room playersRoom;
     public bool containsPlayer;
 
 
@@ -23,6 +23,8 @@ public class Sector : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        monsterBrain = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterBrain>();
+
         //Loop through all rooms and set their ID
         Room tempRoom;
         for (int i = 0; i < sectorRooms.Length; i++)
@@ -72,5 +74,11 @@ public class Sector : MonoBehaviour
                 tempRoom.containsKey = false;
             }
         }
+    }
+
+    public void updatePlayersRoom(Room room) {
+        playersRoom = room;
+        monsterBrain.updateCurrentRoom (room);
+
     }
 }
