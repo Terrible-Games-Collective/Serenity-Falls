@@ -12,6 +12,7 @@ public class CornerGhostAI : MonoBehaviour
     public Transform ghostTrans;
 
     public GameObject scareEffect;
+    public GameObject target;
 
     // Start is called before the first frame update
     void Start()
@@ -58,8 +59,9 @@ public class CornerGhostAI : MonoBehaviour
 
     public void jumpscare()
     {
+        Vector3 spawnloc = target.transform.position;
         GameObject scare = Instantiate(scareEffect, transform.position, Quaternion.identity);
-        Destroy(scare, 10f);
+        Destroy(scare, 5f);
         Destroy(gameObject);
     }
 
