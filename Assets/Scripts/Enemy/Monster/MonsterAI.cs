@@ -152,4 +152,9 @@ public class MonsterAI : MonoBehaviour
         return (Vector2.Distance(transform.position, target.position) < 0.5f);
     }
 
+    private FovDetection GetFovDetection()
+    {
+        return GetComponent<FovDetection>();
+    }
+
 }

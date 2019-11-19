@@ -5,13 +5,13 @@ using UnityEngine;
 using StateMachineTools;
 using Pathfinding;
 
-public class MonStunnedState : State<MonsterAI>
+public class MonIntimidateState : State<MonsterAI>
 {
 
     //State Initialization ***************************
-    private static MonStunnedState _instance;
+    private static MonIntimidateState _instance;
 
-    private MonStunnedState()
+    private MonIntimidateState()
     {
         if (_instance != null)
         {
@@ -22,13 +22,13 @@ public class MonStunnedState : State<MonsterAI>
     }
 
     //If no instance exists, create one
-    public static MonStunnedState Instance
+    public static MonIntimidateState Instance
     {
         get
         {
             if (_instance == null)
             {
-                new MonStunnedState();
+                new MonIntimidateState();
             }
 
             return _instance;

@@ -12,6 +12,8 @@ public class MonStalkState : State<MonsterAI>
     //State Initialization ***************************
     private static MonStalkState _instance;
 
+    private MonsterBrain.monster_manager monsterBrain;
+
     private MonStalkState()
     {
         if (_instance != null)
@@ -41,18 +43,14 @@ public class MonStalkState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
-        _owner.currentState = MonsterAI.MonsterState.Stalk;
-        if (target == null)
-        {
-            //get target to chase based off of their tag
-            target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        }
-        if (ai == null)
-        {
-            ai = _owner.GetComponent<IAstarAI>();
-        }
-        _owner.target = target.transform;
-        ai.maxSpeed = _owner.chaseSpeed;
+		if (ai == null)
+		{
+			ai = _owner.GetComponent<IAstarAI>();
+		}
+
+		monsterBrain = _owner.GetMonster_Manager();
+        target = monsterBrain.currentSector.getRandomRoom().transform;
+        
     }
 
     public override void ExitState(MonsterAI _owner)

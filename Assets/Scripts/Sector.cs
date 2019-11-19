@@ -78,7 +78,7 @@ public class Sector : MonoBehaviour
 
     public void updatePlayersRoom(Room room) {
         playersRoom = room;
-        monsterBrain.updateCurrentRoom (room);
+        monsterBrain.updateCurrentSector (this);
 
     }
 }
