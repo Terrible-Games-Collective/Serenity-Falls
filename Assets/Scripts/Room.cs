@@ -21,7 +21,7 @@ public class Room : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            sector.updatePlayersRoom(this);
+            sector.updatePlayersSector(this);
         }
     }
 
