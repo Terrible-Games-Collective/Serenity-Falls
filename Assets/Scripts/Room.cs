@@ -44,10 +44,4 @@ public class Room : MonoBehaviour
         if (sector == null)
             sector = transform.parent.gameObject.GetComponent<Sector>();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

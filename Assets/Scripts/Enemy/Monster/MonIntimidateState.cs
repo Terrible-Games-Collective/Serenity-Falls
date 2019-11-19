@@ -10,6 +10,8 @@ public class MonIntimidateState : State<MonsterAI>
 
     //State Initialization ***************************
     private static MonIntimidateState _instance;
+    private float timeStart;
+    private Transform target;
 
     private MonIntimidateState()
     {
@@ -40,7 +42,8 @@ public class MonIntimidateState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
-        _owner.currentState = MonsterAI.MonsterState.Stunned;
+        _owner.currentState = MonsterAI.MonsterState.Intimidate;
+
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -50,6 +53,8 @@ public class MonIntimidateState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        if (_owner.isReachedTarget(target)){
+            _owner.GetMonster_Manager().currentSector.playersRoom;
+        }
     }
 }

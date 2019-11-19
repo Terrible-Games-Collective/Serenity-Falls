@@ -9,7 +9,7 @@ public class MonsterAI : MonoBehaviour
 {
     //State Machine Stuff****************
     //Enum to keep track of state
-    public enum MonsterState { Idle, Stunned, Stalk, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
+    public enum MonsterState { Idle, Intimidate, Stalk, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
     public MonsterState currentState;
 
     public StateMachine<MonsterAI> stateMachine { get; set; }//Instance of the StateMachine class
@@ -125,12 +125,12 @@ public class MonsterAI : MonoBehaviour
         return (Vector2.Distance(transform.position, target.position) < 0.5f);
     }
 
-    private FovDetection GetFovDetection()
+    public FovDetection GetFovDetection()
     {
         return GetComponent<FovDetection>();
     }
 
-    private void setTarget(GameObject tar)
+    public void setTarget(GameObject tar)
     {
         target = tar.GetComponent<Transform>();
         ai.destination = target.position;
