@@ -28,6 +28,7 @@ public class Battery : Interactable
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
             GetBattery();
+            upgradeFlashlight();
         }
     }
     public void GetBattery()
@@ -35,5 +36,10 @@ public class Battery : Interactable
         keySprite.enabled = false;
         triggerCollider.enabled = false;
         batteryCollider.enabled = false;
+    }
+
+    public void upgradeFlashlight()
+    {
+        flashlight.transform.localScale += new Vector3(0, 1, 0);
     }
 }
