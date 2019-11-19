@@ -157,4 +157,9 @@ public class MonsterAI : MonoBehaviour
         return GetComponent<FovDetection>();
     }
 
+    private void setTarget(GameObject tar)
+    {
+        target = tar.GetComponent<Transform>();
+        ai.destination = target.position;
+    }
 }

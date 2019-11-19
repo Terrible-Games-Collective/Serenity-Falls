@@ -7,7 +7,6 @@ using Pathfinding;
 
 public class MonStalkState : State<MonsterAI>
 {
-    IAstarAI ai;
     private Transform target;
     //State Initialization ***************************
     private static MonStalkState _instance;
@@ -41,12 +40,7 @@ public class MonStalkState : State<MonsterAI>
 
 
 
-    public override void EnterState(MonsterAI _owner)
-    {
-		if (ai == null)
-		{
-			ai = _owner.GetComponent<IAstarAI>();
-		}
+    public override void EnterState(MonsterAI _owner) {
 
 		monsterBrain = _owner.GetMonster_Manager();
         target = monsterBrain.currentSector.getRandomRoom().transform;
@@ -60,6 +54,8 @@ public class MonStalkState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        _owner.target = target.transform;
+        if (_owner.isReachedTarget(target.transform)) {
+            target = monsterBrain.currentSector.getRandomRoom().transform;
+        }
     }
 }
