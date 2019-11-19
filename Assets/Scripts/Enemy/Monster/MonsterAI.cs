@@ -39,7 +39,7 @@ public class MonsterAI : MonoBehaviour
         startStateTime = Time.fixedUnscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
-        monsterBrain = GetComponent<MonsterBrain>().monster_brain;
+        monsterBrain = GetComponent<MonsterBrain>().manager;
 
 
 
@@ -146,6 +146,10 @@ public class MonsterAI : MonoBehaviour
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             Debug.Log("YOU ARE DEAD");
         }
+    }
+
+    public bool isReachedTarget(Transform target) {
+        return (Vector2.Distance(transform.position, target.position) < 0.5f);
     }
 
 }
