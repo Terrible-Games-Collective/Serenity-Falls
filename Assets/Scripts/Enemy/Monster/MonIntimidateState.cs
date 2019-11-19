@@ -54,7 +54,7 @@ public class MonIntimidateState : State<MonsterAI>
     public override void UpdateState(MonsterAI _owner)
     {
         if (_owner.isReachedTarget(target)){
-            _owner.GetMonster_Manager().currentSector.playersRoom;
+            //_owner.GetMonster_Manager().currentSector.playersRoom;
         }
     }
 }

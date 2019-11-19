@@ -40,7 +40,7 @@ public class MonBlockDoorState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
-        _owner.currentState = MonsterAI.MonsterState.Stunned;
+        _owner.currentState = MonsterAI.MonsterState.BlockDoor;
     }
 
     public override void ExitState(MonsterAI _owner)

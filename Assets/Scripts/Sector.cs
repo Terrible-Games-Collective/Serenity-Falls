@@ -25,14 +25,17 @@ public class Sector : MonoBehaviour
     {
         monsterBrain = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterBrain>();
 
+        sectorRooms = GetComponentsInChildren<Room>();
+
         //Loop through all rooms and set their ID
         Room tempRoom;
         for (int i = 0; i < sectorRooms.Length; i++)
         {
-            tempRoom = sectorRooms[i].GetComponent<Room>();
+            tempRoom = sectorRooms[i];
             tempRoom.roomID = i;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
