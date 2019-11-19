@@ -7,11 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5685808971285401893, guid: 5211a9d9d587e4c4a86c5a19ddac6f65,
-        type: 3}
-      propertyPath: m_Name
-      value: DoorV
-      objectReference: {fileID: 0}
     - target: {fileID: 5685808971285401888, guid: 5211a9d9d587e4c4a86c5a19ddac6f65,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -66,6 +61,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685808971285401888, guid: 5211a9d9d587e4c4a86c5a19ddac6f65,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685808971285401893, guid: 5211a9d9d587e4c4a86c5a19ddac6f65,
+        type: 3}
+      propertyPath: m_Name
+      value: DoorV
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5211a9d9d587e4c4a86c5a19ddac6f65, type: 3}
