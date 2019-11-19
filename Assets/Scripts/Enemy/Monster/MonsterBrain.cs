@@ -15,6 +15,8 @@ public class MonsterBrain : MonoBehaviour
     [SerializeField]
     private GameObject[] allKeys;
 
+    private Room currentRoom; //this gets updated by the sectors directly.
+
 
     public struct monster_manager
     {
@@ -82,5 +84,9 @@ public class MonsterBrain : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void updateCurrentRoom(Room room) {
+        currentRoom = room;
     }
 }
