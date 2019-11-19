@@ -13,7 +13,7 @@ public class Sector : MonoBehaviour
 
     public bool containsKey;
 
-    public GameObject[] sectorRooms;
+    public Room[] sectorRooms;
     public Room playersRoom;
     public bool containsPlayer;
 
@@ -78,7 +78,12 @@ public class Sector : MonoBehaviour
 
     public void updatePlayersRoom(Room room) {
         playersRoom = room;
-        monsterBrain.updateCurrentSector (this);
+        monsterBrain.updateCurrentSector(this);
 
+    }
+
+    public Room getRandomRoom()
+    { 
+        return sectorRooms[Random.Range(0, sectorRooms.Length + 1)];
     }
 }

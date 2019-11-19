@@ -66,7 +66,7 @@ public class MonsterAI : MonoBehaviour
     //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
     public void GoToNextState(bool forceTransition = false)
     {
-        MonsterState nextState = DecideNextState();
+        MonsterState nextState = DecideNextTrapState();
 
         //If forceTransition is true and the current state is deemed the best state the monster will
         //enter it's current state again, if forceTransition is false and the current state is the best
@@ -100,42 +100,15 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    private MonsterState DecideNextState() {
-        //if (monsterBrain.remainingKeys.Count == 3) {
-        //    if(monsterBrain.blockedDoors < 3) {
-        //        return MonsterState.BlockDoor;
-        //    }
-        //    return MonsterState.Stalk;
-        //}
 
-        //if(monsterBrain.remainingKeys.Count == 2) {
-        //    if (monsterBrain.breakerOn) {
-        //        return MonsterState.BreakerSwitch;
-        //    }
-        //    else if(monsterBrain.blockedDoors < 4) {
-        //        return MonsterState.BlockDoor;
-        //    }
-        //    return MonsterState.Stalk;
-        //}
+    private MonsterState DecideNextSearchState()
+    {
+        return MonsterState.Idle;
+    }
 
-        //if(monsterBrain.remainingKeys.Count == 1) {
-        //    if (monsterBrain.breakerOn) {
-        //        return MonsterState.BreakerSwitch;
-        //    }
-        //    else if (monsterBrain.minionsSpawned < monsterBrain.maxMinions) {
-        //        return MonsterState.SpawnMinion;
-        //    }
-        //    else if (monsterBrain.blockedDoors < 4) {
-        //        return MonsterState.BlockDoor;
-        //    }
-        //    return MonsterState.Stalk;
-        //}
-
-        //if(monsterBrain.remainingKeys.Count == 0) {
-        //    return MonsterState.KillMode;
-        //}
-
-        return MonsterState.Stalk;
+    private MonsterState DecideNextTrapState()
+    {
+        return MonsterState.Idle;
     }
 
 
