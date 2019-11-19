@@ -44,6 +44,7 @@ public class FovDetection : MonoBehaviour
     //Target: Object enemy is searching for
     public bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
     {
+        int layerMask = 12 << 14;
         //Grab all objects that overlap with the FOV Radius
         //if there is more then 100 items this could cause overflow
         Collider2D[] withinRadius = new Collider2D[100];
@@ -70,7 +71,7 @@ public class FovDetection : MonoBehaviour
 
                         //Check if ray has hit the target if true MainEnemy sees the target,
                         //if false an object is in the way
-                        if(hit.transform == target)
+                        if(hit.transform == target.transform)
                         {
                             return true;
        
