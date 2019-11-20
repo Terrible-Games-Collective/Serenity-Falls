@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButton : MonoBehaviour
 {
-    public void playGame()
+    void OnTriggerEnter(Collider other)
     {
-        SceneManager.LoadScene(0);
+        if (other.gameObject.tag == "Player")
+            SceneManager.LoadScene(3);
     }
 }
