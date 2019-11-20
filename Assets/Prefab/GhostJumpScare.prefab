@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7048763232358612709}
   - component: {fileID: 2805714092925857008}
   - component: {fileID: 6549256232435337975}
+  - component: {fileID: 50426453120158564}
+  - component: {fileID: 114084582504517308}
   m_Layer: 11
   m_Name: GhostJumpScare
   m_TagString: Untagged
@@ -176,3 +178,38 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!50 &50426453120158564
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264862768999555645}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 0.0001
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
+--- !u!114 &114084582504517308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1264862768999555645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe4ad73d6240704fa7856177bc16af2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 8782955186894696679, guid: 0283072712cf7e64d87538ca6395f63a, type: 3}
+  moveSpeed: 100
