@@ -121,7 +121,7 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
-    public bool isReachedTarget(Transform target) {
+    public bool isReachedTarget() {
         return (Vector2.Distance(transform.position, target.position) < 0.5f);
     }
 

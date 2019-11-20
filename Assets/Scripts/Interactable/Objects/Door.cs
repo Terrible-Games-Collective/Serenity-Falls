@@ -17,6 +17,8 @@ public class Door : Interactable
     public BoxCollider2D physicsCollider;
     public Signal KeySignal;
 
+    private MonsterBrain.monster_manager monsterBrain;
+
     // blocked door
     public float cooldown;
     public float cooldownTimer;
@@ -29,6 +31,8 @@ public class Door : Interactable
     private void Start()
     {
         anim = GetComponent<Animator>();
+
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterAI>().GetMonster_Manager();
     }
     private void Update()
     {
@@ -71,6 +75,23 @@ public class Door : Interactable
         }
         BlockedDoorCooldown();
     }
+
+    //Used by the monster to block doors
+    public void BlockDoor()
+    {
+        cooldownTimer = cooldown;
+        // if the door open to begin with
+        if (isOpen)
+        {
+            Close();
+        }
+        if (thisDoorType == DoorType.normal)
+        {
+            thisDoorType = DoorType.blocked;
+            monsterBrain.blockedDoors++;
+        }
+    }
+
     public void Open()
     {
         isOpen = true;
@@ -96,6 +117,7 @@ public class Door : Interactable
         {
             cooldownTimer = 0;
             thisDoorType = DoorType.normal;
+            monsterBrain.blockedDoors--;
         }
     }
 
