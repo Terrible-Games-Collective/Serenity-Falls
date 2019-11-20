@@ -86,9 +86,9 @@ public class MonBlockDoorState : State<MonsterAI>
 
             //If there are no keys left it will go to block doors in the players section, else pick a sector that still has a key
             if (sector == null)
-                tempRoom = monsterBrain.currentSector.getRandomRoom();
+                tempRoom = monsterBrain.currentSector.getRandomRoom().GetComponent<Room>();
             else
-                tempRoom = sector.getRandomRoom();
+                tempRoom = sector.getRandomRoom().GetComponent<Room>();
 
 
             if (tempRoom.doors.Length != 0)

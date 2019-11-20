@@ -15,7 +15,7 @@ public class HidePlayer : Interactable
     // Start is called before the first frame update
     void Start()
     {
-        
+        isHiding.isHiding = false;
     }
 
     // Update is called once per frame

@@ -147,7 +147,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.016032696, y: 0.024049193}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -158,7 +158,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.2992785, y: 1.1977379}
   m_EdgeRadius: 0
 --- !u!114 &2128639630518396690
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
   playerInRange: 0
   item: {fileID: 2128639630518396688}
-  isHiding: 0
+  isHiding: {fileID: 11400000, guid: a99704fac1ae7174ea046b4693283eb4, type: 2}
   player: {fileID: 0}
   hidingObject: {fileID: 2128639630518396684}
   cam: {fileID: 0}
