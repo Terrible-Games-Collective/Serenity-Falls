@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class Breaker : Interactable
 {
-    public GameObject[] lights;
-
+    public GameObject MapLighting;
+    public GameObject MainLights;
     // Update is called once per frame
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
-            UseBreaker();
+            StartCoroutine(UseBreaker());
         }
     }
-    public void UseBreaker()
+    private IEnumerator UseBreaker()
     {
-        for (int i = 0; i < lights.Length; i++)
+        // if (main lights are on)
+        //      turn it off
+        //      waitforseconds(2) 
+        //      backuplights on
+        // else if (main lights are off)
+        //      waitforseconds(5)
+        //      turn it on
+        //      turn off backup
+        if (MainLights.activeSelf)
         {
-            Debug.Log("Power are now on/off");
+            MainLights.SetActive(false);
+            yield return new WaitForSeconds(2f);
+            MapLighting.SetActive(true);
         }
+        else
+        {
+            yield return new WaitForSeconds(3f);
+            MainLights.SetActive(true);
+            MapLighting.SetActive(false);
+        }
+        
     }
 
 }

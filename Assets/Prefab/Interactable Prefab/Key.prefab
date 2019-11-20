@@ -139,6 +139,7 @@ MonoBehaviour:
   contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
   contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
   playerInRange: 0
+  item: {fileID: 2513957267568381306}
   playerInventory: {fileID: 11400000, guid: bcbd4f6f4d6848145bc3a27b84f778c3, type: 2}
   keySprite: {fileID: 2513957267568381306}
   triggerCollider: {fileID: 6714829016810347688}

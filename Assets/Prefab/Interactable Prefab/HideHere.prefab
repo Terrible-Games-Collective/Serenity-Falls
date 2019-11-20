@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4694853563085915745
+--- !u!1 &2128639630518396684
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,12 +8,12 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4694853563085915772}
-  - component: {fileID: 4694853563085915773}
-  - component: {fileID: 4694853563085915746}
-  - component: {fileID: 4694853563085915747}
-  - component: {fileID: 4694853563085915744}
-  - component: {fileID: 4694853563085915775}
+  - component: {fileID: 2128639630518396689}
+  - component: {fileID: 2128639630518396688}
+  - component: {fileID: 2128639630518396687}
+  - component: {fileID: 2128639630518396686}
+  - component: {fileID: 2128639630518396685}
+  - component: {fileID: 2128639630518396690}
   m_Layer: 0
   m_Name: HideHere
   m_TagString: Interactables
@@ -21,27 +21,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4694853563085915772
+--- !u!4 &2128639630518396689
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_GameObject: {fileID: 2128639630518396684}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.585, y: -7.933, z: -0.3456952}
   m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &4694853563085915773
+--- !u!212 &2128639630518396688
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
+  m_GameObject: {fileID: 2128639630518396684}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -83,13 +83,13 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!68 &4694853563085915746
+--- !u!68 &2128639630518396687
 EdgeCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
+  m_GameObject: {fileID: 2128639630518396684}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -108,13 +108,13 @@ EdgeCollider2D:
   - {x: -0.4103569, y: 0.26215076}
   - {x: -0.41002408, y: -0.27556133}
   - {x: -0.33518887, y: -0.34212247}
---- !u!61 &4694853563085915747
+--- !u!61 &2128639630518396686
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
+  m_GameObject: {fileID: 2128639630518396684}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -134,13 +134,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.6867472, y: 0.55021155}
   m_EdgeRadius: 0
---- !u!61 &4694853563085915744
+--- !u!61 &2128639630518396685
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
+  m_GameObject: {fileID: 2128639630518396684}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -160,13 +160,13 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &4694853563085915775
+--- !u!114 &2128639630518396690
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4694853563085915745}
+  m_GameObject: {fileID: 2128639630518396684}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5966649e415ac0440904ec985aa46890, type: 3}
@@ -175,8 +175,9 @@ MonoBehaviour:
   contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
   contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
   playerInRange: 0
+  item: {fileID: 2128639630518396688}
   isHiding: 0
   player: {fileID: 0}
-  hidingObject: {fileID: 4694853563085915745}
+  hidingObject: {fileID: 2128639630518396684}
   cam: {fileID: 0}
   HideUI: {fileID: 0}

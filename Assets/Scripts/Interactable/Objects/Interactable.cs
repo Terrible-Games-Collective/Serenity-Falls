@@ -7,6 +7,7 @@ public class Interactable : MonoBehaviour
     public Signal contextOn;
     public Signal contextOff;
     public bool playerInRange;
+    public SpriteRenderer item;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +24,14 @@ public class Interactable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+
             contextOn.Raise();
             playerInRange = true;
+            if (item.color != Color.red)
+            {
+                item.color = Color.green;
+            }
+            
         }
     }
     private void OnTriggerExit2D(Collider2D collision)
@@ -33,7 +40,11 @@ public class Interactable : MonoBehaviour
         {
             contextOff.Raise();
             playerInRange = false;
-
+            if (item.color != Color.red)
+            {
+                item.color = Color.white;
+            }
+            
         }
     }
 }

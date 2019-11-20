@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HidePlayer : Interactable
 {
-    public bool isHiding;
+    public IsHiding isHiding;
     public GameObject player;
     public GameObject hidingObject;
     public Camera cam;
@@ -24,7 +24,7 @@ public class HidePlayer : Interactable
 
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
-            if (isHiding)
+            if (isHiding.isHiding)
             {
                 HideUI.SetActive(false);
                 UnHide();
@@ -41,7 +41,7 @@ public class HidePlayer : Interactable
     }
     public void Hide()
     {
-        isHiding = true;
+        isHiding.isHiding = true;
         prevPos = new Vector2(player.transform.position.x, player.transform.position.y);
         player.transform.position = new Vector2(hidingObject.transform.position.x, hidingObject.transform.position.y);
         player.SetActive(false);
@@ -49,7 +49,7 @@ public class HidePlayer : Interactable
     }
     public void UnHide()
     {
-        isHiding = false;
+        isHiding.isHiding = false;
         player.transform.position = prevPos;
         player.SetActive(true);
         cam.orthographicSize = 10;
@@ -57,9 +57,10 @@ public class HidePlayer : Interactable
 
     public void MonsterCatch()
     {
-        isHiding = false;
+        isHiding.isHiding = false;
         player.SetActive(true);
         cam.orthographicSize = 10;     
         // player dead
     }
+
 }

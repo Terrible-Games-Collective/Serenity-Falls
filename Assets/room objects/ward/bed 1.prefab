@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 231632592670714560}
   - component: {fileID: 5118179552558737400}
   - component: {fileID: 4181628249281106263}
+  - component: {fileID: 61010876947681264}
+  - component: {fileID: 114825941049478110}
   m_Layer: 0
   m_Name: bed 1
   m_TagString: Untagged
@@ -106,3 +108,50 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.25, y: 9.2}
   m_EdgeRadius: 0
+--- !u!61 &61010876947681264
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5784421836262509077}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.024399996, y: 0.024400473}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.25, y: 9.2}
+    newSize: {x: 3.25, y: 9.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 5.2508407, y: 11.005623}
+  m_EdgeRadius: 0
+--- !u!114 &114825941049478110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5784421836262509077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5966649e415ac0440904ec985aa46890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
+  contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
+  playerInRange: 0
+  item: {fileID: 5118179552558737400}
+  isHiding: {fileID: 11400000, guid: a99704fac1ae7174ea046b4693283eb4, type: 2}
+  player: {fileID: 8782955186894696686, guid: 0283072712cf7e64d87538ca6395f63a, type: 3}
+  hidingObject: {fileID: 5784421836262509077}
+  cam: {fileID: 123512684695279860, guid: b78ee7c32041cf44f982cc4a3f9a4cd9, type: 3}
+  HideUI: {fileID: 7923899454069129701, guid: 083917b4ad5036b4387d70e0b65e38ee, type: 3}
