@@ -66,11 +66,18 @@ public class MonsterAI : MonoBehaviour
     //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
     public void GoToNextState(bool forceTransition = false)
     {
-        MonsterState nextState = DecideNextTrapState();
+        MonsterState nextState;
+        if (searching)
+        {
+            nextState = DecideNextSearchState();
+        } else
+        {
+            nextState = DecideNextTrapState();
+        }
 
-        //If forceTransition is true and the current state is deemed the best state the monster will
-        //enter it's current state again, if forceTransition is false and the current state is the best
-        //it will continue what it is doing
+        // If forceTransition is true and the current state is deemed the best state the monster will
+        // enter it's current state again, if forceTransition is false and the current state is the best
+        // it will continue what it is doing
         if (nextState == currentState && !forceTransition) 
         {
             return;

@@ -42,7 +42,7 @@ public class MonStalkState : State<MonsterAI>
     public override void EnterState(MonsterAI _owner) {
 
 		monsterBrain = _owner.GetMonster_Manager();
-        _owner.setTarget(monsterBrain.currentSector.getRandomRoom().transform);
+        _owner.setTargetAsTransform(monsterBrain.currentSector.getRandomRoom().transform);
         
     }
 
@@ -54,7 +54,7 @@ public class MonStalkState : State<MonsterAI>
     public override void UpdateState(MonsterAI _owner)
     {
         if (_owner.isReachedTarget()) {
-            _owner.setTarget(monsterBrain.currentSector.getRandomRoom().transform);
+            _owner.setTargetAsTransform(monsterBrain.currentSector.getRandomRoom().transform);
         }
     }
 }
