@@ -78,7 +78,7 @@ public class PatrolAI : MonoBehaviour
         {
             currentState = "chase";
             stateMachine.ChangeState(EnemyChaseState.Instance);
-        } else if (currentState != "patrol") {
+        } else if (currentState != "patrol" && !fov.IsInView()) {
             currentState = "patrol";
             stateMachine.ChangeState(EnemyPatrolState.Instance);
         }
