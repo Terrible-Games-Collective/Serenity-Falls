@@ -148,4 +148,10 @@ public class MonsterAI : MonoBehaviour
         target = tar;
         ai.destination = target.position;
     }
+
+
+    public void SpawnMinion(GameObject minionPrefab, Transform location)
+    {
+        Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
+    }
 }
