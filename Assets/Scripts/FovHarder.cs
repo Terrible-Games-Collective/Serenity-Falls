@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FovDetection : MonoBehaviour
+public class FovHarder : MonoBehaviour
 {
     //Transform of target
     public Transform Target;
@@ -13,6 +13,7 @@ public class FovDetection : MonoBehaviour
     private bool isInField;
 
     //draw the outline of FOV
+    /**
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
@@ -38,45 +39,45 @@ public class FovDetection : MonoBehaviour
         //Gizmos.color = Color.black;
         //Gizmos.DrawRay(transform.position, transform.up * maxRadius);
     }
+    */
+   
 
     //True if target is seen within FOV flase otherwise
     //MainEnemy: Object with FOV
     //Target: Object enemy is searching for
     public bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
     {
-        int layerMask = 12 << 14;
         //Grab all objects that overlap with the FOV Radius
         //if there is more then 100 items this could cause overflow
         Collider2D[] withinRadius = new Collider2D[100];
-        int count = Physics2D.OverlapCircleNonAlloc(MainEnemy.position,MaxRadius, withinRadius);
-        int layerMask = (1<<12)|(1<<11);
-        for(int i = 0; i < count + 1; i++)
+        int count = Physics2D.OverlapCircleNonAlloc(MainEnemy.position, MaxRadius, withinRadius);
+
+        for (int i = 0; i < count + 1; i++)
         {
 
             if (withinRadius[i] != null)
             {
                 //if the current object is the target
-                if(withinRadius[i].transform == target)
+                if (withinRadius[i].transform == target)
                 {
-
+                    Debug.Log("current object is the target");
                     //get vector from target to MainEnemy
                     Vector2 directionToTarget = (target.position - MainEnemy.position).normalized;
 
                     float Angle = Vector2.Angle(MainEnemy.up, directionToTarget);
 
-                    if(Angle <= MaxAngle)
+                    if (Angle <= MaxAngle)
                     {
+                        Debug.Log("angle is <= MaxAngle shit");
                         //shoot a raycast toward the target if with the FOV angle
-                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius,layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius);
 
                         //Check if ray has hit the target if true MainEnemy sees the target,
                         //if false an object is in the way
-                        if(hit.transform == target.transform)
+                        if (hit)
                         {
-                            Debug.Log("ray has hit " + hit.transform);
-                            Debug.Log("the target is " + target.transform); 
+                            Debug.Log(hit.transform);
                             return true;
-       
                         }
                     }
                 }
@@ -91,6 +92,7 @@ public class FovDetection : MonoBehaviour
     void Start()
     {
         isInField = inFieldView(transform, Target, maxAngle, maxRadius);
+
     }
 
     // Update is called once per frame
