@@ -8,6 +8,7 @@ TagManager:
   - Battery
   - Interactables
   - Monster
+  - fovtest
   layers:
   - Default
   - TransparentFX
@@ -21,9 +22,9 @@ TagManager:
   - Light Sources
   - Ambient Light
   - Walls
-  - Rooms
-  - 
-  - 
+  - character
+  - rooms
+  - nurse
   - 
   - 
   - 
