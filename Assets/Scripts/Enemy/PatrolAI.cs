@@ -45,6 +45,7 @@ public class PatrolAI : MonoBehaviour
         currentState = "patrol";
         gameTimer = Time.time;
         ai = GetComponent<IAstarAI>();
+        ai.maxSpeed = patrolSpeed;
         // Update the destination right before searching for a path as well.
         // This is enough in theory, but this script will also update the destination every
         // frame as the destination is used for debugging and may be used for other things by other
@@ -77,9 +78,11 @@ public class PatrolAI : MonoBehaviour
         if (currentState != "chase" && fov.IsInView())
         {
             currentState = "chase";
+            ai.maxSpeed = chaseSpeed;
             stateMachine.ChangeState(EnemyChaseState.Instance);
         } else if (currentState != "patrol" && !fov.IsInView()) {
             currentState = "patrol";
+            ai.maxSpeed = patrolSpeed;
             stateMachine.ChangeState(EnemyPatrolState.Instance);
         }
         ai.destination = target.position;
