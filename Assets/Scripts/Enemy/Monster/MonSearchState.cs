@@ -52,7 +52,6 @@ public class MonSearchState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void UpdateState(MonsterAI _owner)
