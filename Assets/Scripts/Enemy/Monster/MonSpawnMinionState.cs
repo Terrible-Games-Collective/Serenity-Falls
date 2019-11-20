@@ -94,7 +94,7 @@ public class MonSpawnMinionState : State<MonsterAI>
             if(monsterBrain.allSectors[i].containsClown == false || monsterBrain.allSectors[i].containsGirl == false)
             {
                 sector = monsterBrain.allSectors[i];
-                tempRoom = sector.getRandomRoom();
+                tempRoom = sector.getRandomRoom().GetComponent<Room>();
                 return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length + 1)];
             }
         }
