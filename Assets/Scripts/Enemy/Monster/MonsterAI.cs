@@ -135,4 +135,10 @@ public class MonsterAI : MonoBehaviour
         target = tar.GetComponent<Transform>();
         ai.destination = target.position;
     }
+
+    public void setTargetAsTransform(Transform tar)
+    {
+        target = tar;
+        ai.destination = target.position;
+    }
 }

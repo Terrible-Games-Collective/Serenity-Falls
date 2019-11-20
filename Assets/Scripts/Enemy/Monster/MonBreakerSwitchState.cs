@@ -59,8 +59,7 @@ public class MonBreakerSwitchState : State<MonsterAI>
     {
         if (_owner.isReachedTarget())
         {
-            //TODO Use Start Coroutine once the new breaker code is in
-            //Make sure to add something in that function to set breakerOn in monster brain when it changes
+            
             breaker.GetComponent<Breaker>().SwitchBreaker();
 
             _owner.GoToNextState();

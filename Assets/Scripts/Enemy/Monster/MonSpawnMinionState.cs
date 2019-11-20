@@ -36,11 +36,25 @@ public class MonSpawnMinionState : State<MonsterAI>
     }
     //*************************************************
 
+    Transform spawnPoint;
+
+    private MonsterBrain.monster_manager monsterBrain;
+
+    GameObject CornerGirlPrefab;
+    GameObject ClownPrefab;
 
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.SpawnMinion;
+
+        monsterBrain = _owner.GetMonster_Manager();
+
+        spawnPoint = ChooseSpawnPoint();
+        _owner.setTargetAsTransform(spawnPoint);
+
+
+
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -50,6 +64,31 @@ public class MonSpawnMinionState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        if (_owner.isReachedTarget())
+        {
+
+            //Spawn prefab at location
+            //Instantiate(CornerGirlPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            //Instantiate(ClownPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+
+            _owner.GoToNextState();
+        }
+    }
+
+    public Transform ChooseSpawnPoint()
+    {
+
+        Room tempRoom;
+        Sector sector;
+
+        sector = monsterBrain.GetSectorWithKey();
+
+        if(sector == null)
+                tempRoom = monsterBrain.currentSector.getRandomRoom();
+            else
+                tempRoom = sector.getRandomRoom();
+
+
+        return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length + 1)]; ;
     }
 }
