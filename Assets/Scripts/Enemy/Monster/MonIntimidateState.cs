@@ -11,7 +11,8 @@ public class MonIntimidateState : State<MonsterAI>
     //State Initialization ***************************
     private static MonIntimidateState _instance;
     private float timeStart;
-    private Transform target;
+    private int index;
+    public bool finished;
 
     private MonIntimidateState()
     {
@@ -42,7 +43,9 @@ public class MonIntimidateState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
+        index = 0;
         _owner.currentState = MonsterAI.MonsterState.Intimidate;
+        _owner.setTarget(_owner.GetMonster_Manager().currentSector.playersRoom.moveSpots[index]);
 
     }
 
@@ -53,8 +56,16 @@ public class MonIntimidateState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
+        Transform[] moveSpots = _owner.GetMonster_Manager().currentSector.playersRoom.moveSpots;
         if (_owner.isReachedTarget()){
-            //_owner.GetMonster_Manager().currentSector.playersRoom;
+            if(index+1 < moveSpots.Length)
+            {
+                index++;
+                _owner.setTarget(moveSpots[index]);
+            } else
+            {
+                _owner.GoToNextState();
+            }
         }
     }
 }
