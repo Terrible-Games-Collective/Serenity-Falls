@@ -40,6 +40,6 @@ public class Battery : Interactable
 
     public void upgradeFlashlight()
     {
-        flashlight.transform.localScale += new Vector3(0, 1, 0);
+        flashlight.transform.localScale += new Vector3(0, 2, 0);
     }
 }

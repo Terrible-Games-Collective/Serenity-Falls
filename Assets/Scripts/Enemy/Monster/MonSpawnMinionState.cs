@@ -43,6 +43,8 @@ public class MonSpawnMinionState : State<MonsterAI>
     GameObject CornerGirlPrefab;
     GameObject ClownPrefab;
 
+    GameObject MinionToSpawn;
+
 
     public override void EnterState(MonsterAI _owner)
     {
@@ -72,11 +74,9 @@ public class MonSpawnMinionState : State<MonsterAI>
     {
         if (_owner.isReachedTarget())
         {
-            
             //Spawn prefab at location
             //Will need to add bit to minion scripts to increment the count.
-            //Instantiate(CornerGirlPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            //Instantiate(ClownPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            _owner.SpawnMinion(MinionToSpawn, spawnPoint);
 
             _owner.GoToNextState();
         }
@@ -95,6 +95,17 @@ public class MonSpawnMinionState : State<MonsterAI>
             {
                 sector = monsterBrain.allSectors[i];
                 tempRoom = sector.getRandomRoom().GetComponent<Room>();
+
+                if (monsterBrain.allSectors[i].containsGirl == false)
+                {
+                    MinionToSpawn = CornerGirlPrefab;
+                }
+                else
+                {
+                    MinionToSpawn = ClownPrefab;
+                }
+
+
                 return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length + 1)];
             }
         }

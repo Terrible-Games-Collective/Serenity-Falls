@@ -44,7 +44,7 @@ public class FovDetection : MonoBehaviour
     //Target: Object enemy is searching for
     public bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
     {
-        int layerMask = 12 << 14;
+        int layerMask = (1<<11)|(1<<12);
         //Grab all objects that overlap with the FOV Radius
         //if there is more then 100 items this could cause overflow
         Collider2D[] withinRadius = new Collider2D[100];
@@ -67,7 +67,7 @@ public class FovDetection : MonoBehaviour
                     if(Angle <= MaxAngle)
                     {
                         //shoot a raycast toward the target if with the FOV angle
-                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius);
+                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius,layerMask);
 
                         //Check if ray has hit the target if true MainEnemy sees the target,
                         //if false an object is in the way

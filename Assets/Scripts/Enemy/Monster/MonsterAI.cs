@@ -82,7 +82,7 @@ public class MonsterAI : MonoBehaviour
         // If forceTransition is true and the current state is deemed the best state the monster will
         // enter it's current state again, if forceTransition is false and the current state is the best
         // it will continue what it is doing
-        if (nextState == currentState && !forceTransition) 
+        if (nextState == currentState && !forceTransition)
         {
             return;
         }
@@ -165,5 +165,10 @@ public class MonsterAI : MonoBehaviour
         {
             seenPlayer = seen;
         }
+    }
+    public void SpawnMinion(GameObject minionPrefab, Transform location)
+    {
+        Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
+
     }
 }
