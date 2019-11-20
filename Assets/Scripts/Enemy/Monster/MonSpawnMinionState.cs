@@ -39,10 +39,6 @@ public class MonSpawnMinionState : State<MonsterAI>
     Transform spawnPoint;
 
     private MonsterBrain.monster_manager monsterBrain;
-
-    GameObject CornerGirlPrefab;
-    GameObject ClownPrefab;
-
     GameObject MinionToSpawn;
 
 
@@ -52,7 +48,7 @@ public class MonSpawnMinionState : State<MonsterAI>
 
         monsterBrain = _owner.GetMonster_Manager();
 
-        spawnPoint = ChooseSpawnPoint();
+        spawnPoint = ChooseSpawnPoint(_owner);
 
         if (spawnPoint == null)
         {
@@ -82,7 +78,7 @@ public class MonSpawnMinionState : State<MonsterAI>
         }
     }
 
-    public Transform ChooseSpawnPoint()
+    public Transform ChooseSpawnPoint(MonsterAI _owner)
     {
 
         Room tempRoom;
@@ -98,11 +94,11 @@ public class MonSpawnMinionState : State<MonsterAI>
 
                 if (monsterBrain.allSectors[i].containsGirl == false)
                 {
-                    MinionToSpawn = CornerGirlPrefab;
+                    MinionToSpawn = _owner.CornerGirlPrefab;
                 }
                 else
                 {
-                    MinionToSpawn = ClownPrefab;
+                    MinionToSpawn = _owner.ClownPrefab;
                 }
 
 

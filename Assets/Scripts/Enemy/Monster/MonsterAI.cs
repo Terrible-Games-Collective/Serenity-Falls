@@ -25,6 +25,10 @@ public class MonsterAI : MonoBehaviour
 
     private FovDetection fov;
 
+    public GameObject CornerGirlPrefab;
+    public GameObject ClownPrefab;
+
+
     protected MonsterBrain.monster_manager monsterBrain;
 
     private float startStateTime;
