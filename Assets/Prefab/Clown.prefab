@@ -225,10 +225,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4105178034437268182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1d2c56b1d30edbc429387624cf79d614, type: 3}
+  m_Script: {fileID: 11500000, guid: 2396192161166464bba2b5074316aac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   detected: 0
   clownTrans: {fileID: 0}
-  clownScare: {fileID: 816550486717787844, guid: 76497758bc59f4f4a82c5eb521ff0e21,
+  clownScare: {fileID: 816550486717787844, guid: 9cc55bdbc76a1434a95abeb01625d837,
     type: 3}
