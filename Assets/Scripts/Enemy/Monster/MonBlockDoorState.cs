@@ -42,6 +42,7 @@ public class MonBlockDoorState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner)
     {
+        _owner.currentState = MonsterAI.MonsterState.BlockDoor;
 
         monsterBrain = _owner.GetMonster_Manager();
 
@@ -62,7 +63,11 @@ public class MonBlockDoorState : State<MonsterAI>
     public override void UpdateState(MonsterAI _owner)
     {
         if (_owner.isReachedTarget())
+        {
             door.GetComponent<Door>().BlockDoor();
+
+            _owner.GoToNextState();
+        }
     }
 
 

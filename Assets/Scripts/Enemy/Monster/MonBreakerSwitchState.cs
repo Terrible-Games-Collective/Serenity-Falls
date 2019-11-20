@@ -36,11 +36,18 @@ public class MonBreakerSwitchState : State<MonsterAI>
     }
     //*************************************************
 
-
+    private GameObject breaker;
+    private MonsterBrain.monster_manager monsterBrain;
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.BreakerSwitch;
+
+        monsterBrain = _owner.GetMonster_Manager();
+        breaker = GameObject.Find("Breaker");
+
+        _owner.setTarget(breaker);
+
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -50,6 +57,13 @@ public class MonBreakerSwitchState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        if (_owner.isReachedTarget())
+        {
+            //TODO Use Start Coroutine once the new breaker code is in
+            //Make sure to add something in that function to set breakerOn in monster brain when it changes
+            breaker.GetComponent<Breaker>().UseBreaker();
+
+            _owner.GoToNextState();
+        }
     }
 }
