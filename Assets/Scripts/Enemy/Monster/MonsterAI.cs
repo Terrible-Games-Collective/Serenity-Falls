@@ -9,7 +9,7 @@ public class MonsterAI : MonoBehaviour
 {
     //State Machine Stuff****************
     //Enum to keep track of state
-    public enum MonsterState { Idle, Intimidate, Stalk, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
+    public enum MonsterState { Idle, Intimidate, Search, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
     public MonsterState currentState;
 
     public StateMachine<MonsterAI> stateMachine { get; set; }//Instance of the StateMachine class
@@ -23,11 +23,14 @@ public class MonsterAI : MonoBehaviour
     public float chaseSpeed;
     public float killModeSpeed;
 
+    private FovDetection fov;
+
     protected MonsterBrain.monster_manager monsterBrain;
 
     private float startStateTime;
     public int stateChangeInterval = 30;
     private bool searching;
+    private bool seenPlayer;
 
 
 
@@ -39,6 +42,7 @@ public class MonsterAI : MonoBehaviour
         startStateTime = Time.fixedUnscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
+        fov = GetComponent<FovDetection>();
         monsterBrain = GetComponent<MonsterBrain>().manager;
 
 
@@ -50,8 +54,8 @@ public class MonsterAI : MonoBehaviour
     void Update()
     {
         if(Time.fixedUnscaledTime - startStateTime > stateChangeInterval) {
-            GoToNextState();
             startStateTime = Time.fixedUnscaledTime;
+            searching = !searching;
         }
 
 
@@ -66,19 +70,19 @@ public class MonsterAI : MonoBehaviour
     //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
     public void GoToNextState(bool forceTransition = false)
     {
-        MonsterState nextState;
-        if (searching)
-        {
-            nextState = DecideNextSearchState();
-        } else
-        {
-            nextState = DecideNextTrapState();
-        }
+        MonsterState nextState = DecideNextSearchState();
+        //if (searching)
+        //{
+        //    nextState = DecideNextSearchState();
+        //} else
+        //{
+        //    nextState = DecideNextTrapState();
+        //}
 
         // If forceTransition is true and the current state is deemed the best state the monster will
         // enter it's current state again, if forceTransition is false and the current state is the best
         // it will continue what it is doing
-        if (nextState == currentState && !forceTransition) 
+        if (nextState == currentState && !forceTransition)
         {
             return;
         }
@@ -98,8 +102,8 @@ public class MonsterAI : MonoBehaviour
             case MonsterState.SpawnMinion:
                 stateMachine.ChangeState(MonSpawnMinionState.Instance);
                 break;
-            case MonsterState.Stalk:
-                stateMachine.ChangeState(MonStalkState.Instance);
+            case MonsterState.Search:
+                stateMachine.ChangeState(MonSearchState.Instance);
                 break;
             case MonsterState.Idle:
                 stateMachine.ChangeState(MonIdleState.Instance);
@@ -110,7 +114,13 @@ public class MonsterAI : MonoBehaviour
 
     private MonsterState DecideNextSearchState()
     {
-        return MonsterState.Idle;
+        if (seenPlayer)
+        {
+            ai.maxSpeed = killModeSpeed;
+            return MonsterState.KillMode;
+        }
+        ai.maxSpeed = chaseSpeed;
+        return MonsterState.Search;
     }
 
     private MonsterState DecideNextTrapState()
@@ -134,7 +144,7 @@ public class MonsterAI : MonoBehaviour
 
     public FovDetection GetFovDetection()
     {
-        return GetComponent<FovDetection>();
+        return fov;
     }
 
     public void setTarget(GameObject tar)
@@ -149,9 +159,16 @@ public class MonsterAI : MonoBehaviour
         ai.destination = target.position;
     }
 
-
+    public void InView(bool seen)
+    {
+        if(seen != seenPlayer)
+        {
+            seenPlayer = seen;
+        }
+    }
     public void SpawnMinion(GameObject minionPrefab, Transform location)
     {
         Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
+
     }
 }

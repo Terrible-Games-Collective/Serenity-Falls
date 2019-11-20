@@ -13,7 +13,7 @@ public class Sector : MonoBehaviour
 
     public bool containsKey;
 
-    public Room[] sectorRooms;
+    public GameObject[] sectorRooms;
     public Room playersRoom;
     public bool containsPlayer;
 
@@ -27,13 +27,18 @@ public class Sector : MonoBehaviour
     {
         monsterBrain = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterBrain>();
 
-        sectorRooms = GetComponentsInChildren<Room>();
+        //Transform[] tempArray = GetComponentsInChildren<Transform>();
+        //sectorRooms = new GameObject[tempArray.Length];
+        //for(int i = 0; i < sectorRooms.Length; i++)
+        //{
+        //    sectorRooms[i] = tempArray[i].gameObject;
+        //}
 
         //Loop through all rooms and set their ID
         Room tempRoom;
         for (int i = 0; i < sectorRooms.Length; i++)
         {
-            tempRoom = sectorRooms[i];
+            tempRoom = sectorRooms[i].GetComponent<Room>();
             tempRoom.roomID = i;
         }
     }
@@ -43,19 +48,9 @@ public class Sector : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("entered Sector " + sectorID);
+            monsterBrain.updateCurrentSector(this);
         }
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == "Player")
-        {
-            Debug.Log("exited Sector " + sectorID);
-        }
-    }
-
-
 
     //Should be called when the player picks up a key
     public void KeyAquired()
@@ -79,8 +74,9 @@ public class Sector : MonoBehaviour
 
     }
 
-    public Room getRandomRoom()
-    { 
-        return sectorRooms[Random.Range(0, sectorRooms.Length + 1)];
+    public GameObject getRandomRoom()
+    {
+        Debug.Log(Random.Range(0, sectorRooms.Length));
+        return sectorRooms[(int)Random.Range(0, sectorRooms.Length)];
     }
 }
