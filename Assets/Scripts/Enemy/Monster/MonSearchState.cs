@@ -54,7 +54,7 @@ public class MonStalkState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        if (_owner.isReachedTarget(target.transform)) {
+        if (_owner.isReachedTarget()) {
             target = monsterBrain.currentSector.getRandomRoom().transform;
         }
     }

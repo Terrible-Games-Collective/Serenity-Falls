@@ -40,4 +40,9 @@ public class Breaker : Interactable
         
     }
 
+    public void SwitchBreaker()
+    {
+        StartCoroutine(UseBreaker());
+    }
+
 }
