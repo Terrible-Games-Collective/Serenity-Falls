@@ -116,7 +116,7 @@ public class MonsterAI : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            //SceneManager.LoadScene(2);
             Debug.Log("YOU ARE DEAD");
         }
     }
