@@ -6,13 +6,15 @@ public class ClownAI : MonoBehaviour
 {
     public bool detected = false;
     public Transform clownTrans;
-
     public GameObject clownScare;
+
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         clownTrans = this.GetComponent<Transform>();
+        player = GameObject.FindGameObjectWithTag("Player");
 
     }
 
@@ -44,9 +46,10 @@ public class ClownAI : MonoBehaviour
 
     public void jumpscare()
     {
+        Vector3 playerLoc = player.transform.position;
         unDetection();
-        GameObject scare = Instantiate(clownScare, transform.position, Quaternion.identity);
-        Destroy(scare, 10f);
+        GameObject scare = Instantiate(clownScare, playerLoc, Quaternion.identity);
+        Destroy(scare, 5.0f);
     }
 
     // Update is called once per frame
