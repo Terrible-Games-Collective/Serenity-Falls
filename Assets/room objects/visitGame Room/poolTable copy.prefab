@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 3117608772016090520}
   - component: {fileID: 1487358861227942111}
   - component: {fileID: 61175360665205470}
+  - component: {fileID: 4486675629684927648}
+  - component: {fileID: 61112188966166770}
   m_Layer: 0
   m_Name: poolTable copy
   m_TagString: Untagged
@@ -105,4 +107,51 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 6, y: 2.5}
+  m_EdgeRadius: 0
+--- !u!114 &4486675629684927648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374003180920981285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5966649e415ac0440904ec985aa46890, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  contextOn: {fileID: 11400000, guid: c6c7a765ba567a64191461bfdb18d6ce, type: 2}
+  contextOff: {fileID: 11400000, guid: 04f16baca7b009049a058b3e43e337da, type: 2}
+  playerInRange: 0
+  item: {fileID: 1487358861227942111}
+  isHiding: {fileID: 11400000, guid: a99704fac1ae7174ea046b4693283eb4, type: 2}
+  player: {fileID: 0}
+  hidingObject: {fileID: 1374003180920981285}
+  cam: {fileID: 0}
+  HideUI: {fileID: 0}
+--- !u!61 &61112188966166770
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374003180920981285}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.04091811, y: 0.00090169907}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 6, y: 2.5}
+    newSize: {x: 6, y: 2.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 7.991525, y: 4.789817}
   m_EdgeRadius: 0
