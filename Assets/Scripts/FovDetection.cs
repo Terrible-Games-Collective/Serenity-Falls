@@ -49,7 +49,7 @@ public class FovDetection : MonoBehaviour
         //if there is more then 100 items this could cause overflow
         Collider2D[] withinRadius = new Collider2D[100];
         int count = Physics2D.OverlapCircleNonAlloc(MainEnemy.position,MaxRadius, withinRadius);
-        int layerMask = (1<<12)|(1<<11);
+
         for(int i = 0; i < count + 1; i++)
         {
 
@@ -67,14 +67,12 @@ public class FovDetection : MonoBehaviour
                     if(Angle <= MaxAngle)
                     {
                         //shoot a raycast toward the target if with the FOV angle
-                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius,layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(MainEnemy.position, target.position - MainEnemy.position, MaxRadius);
 
                         //Check if ray has hit the target if true MainEnemy sees the target,
                         //if false an object is in the way
                         if(hit.transform == target.transform)
                         {
-                            Debug.Log("ray has hit " + hit.transform);
-                            Debug.Log("the target is " + target.transform); 
                             return true;
        
                         }
