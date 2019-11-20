@@ -14,7 +14,16 @@ public class MonsterBrain : MonoBehaviour
 
         public bool breakerOn;
         public Sector currentSector; //this gets updated by the sectors directly.
-
+        public Sector[] allSectors; //Array of all sectors, theri index is their sector ID
+        public Sector GetSectorWithKey()
+        {
+           for (int i = 1; i < allSectors.Length; i++)
+            {
+                if (allSectors[i].containsKey)
+                    return allSectors[i];
+            }
+            return null;
+        }
 
     }
 
@@ -24,7 +33,11 @@ public class MonsterBrain : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        manager.allSectors = new Sector[4];
+        for(int i = 0; i < 4; i++)
+        {
+            manager.allSectors[i] = GameObject.Find("Sector (" + 0 + ")").GetComponent<Sector>();
+        }
     }
 
     // Update is called once per frame
