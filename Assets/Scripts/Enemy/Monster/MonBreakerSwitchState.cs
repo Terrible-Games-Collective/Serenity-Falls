@@ -46,7 +46,6 @@ public class MonBreakerSwitchState : State<MonsterAI>
         monsterBrain = _owner.GetMonsterBrain();
         breaker = GameObject.Find("Breaker");
 
-        _owner.setTarget(breaker);
 
     }
 

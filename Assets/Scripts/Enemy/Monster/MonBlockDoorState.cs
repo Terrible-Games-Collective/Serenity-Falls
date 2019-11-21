@@ -49,9 +49,9 @@ public class MonBlockDoorState : State<MonsterAI>
 
         door = pickRoomDoor();
 
-        
+       
+        _owner.target = door.transform;
 
-        _owner.setTarget(door);
 
 
 

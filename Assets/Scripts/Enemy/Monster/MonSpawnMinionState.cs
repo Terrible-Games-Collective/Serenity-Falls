@@ -55,7 +55,8 @@ public class MonSpawnMinionState : State<MonsterAI>
             _owner.GoToNextState();
         }
 
-        _owner.setTargetAsTransform(spawnPoint);
+        //_owner.setTargetAsTransform(spawnPoint);
+        _owner.target = spawnPoint;
 
 
 

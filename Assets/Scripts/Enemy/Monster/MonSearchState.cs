@@ -46,8 +46,10 @@ public class MonSearchState : State<MonsterAI>
         //Debug.Log(sector);
         GameObject gameRoom = sector.getRandomRoom();
         Room room = gameRoom.GetComponent<Room>();
-        _owner.setTargetAsTransform(room.moveSpots[0]);
-        
+        //_owner.setTargetAsTransform(room.moveSpots[0]);
+        _owner.target = room.moveSpots[0];
+
+
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -59,7 +61,9 @@ public class MonSearchState : State<MonsterAI>
         
 
         if (_owner.isReachedTarget()) {
-            _owner.setTargetAsTransform(monsterBrain.currentSector.getRandomRoom().GetComponent<Room>().moveSpots[0]);
+            //_owner.setTargetAsTransform(monsterBrain.currentSector.getRandomRoom().GetComponent<Room>().moveSpots[0]);
+
+            _owner.target = monsterBrain.currentSector.getRandomRoom().GetComponent<Room>().moveSpots[0];
         }
     }
 }
