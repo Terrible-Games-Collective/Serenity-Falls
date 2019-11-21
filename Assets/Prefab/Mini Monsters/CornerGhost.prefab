@@ -137,7 +137,7 @@ MonoBehaviour:
   moveSpeed: 20
   ghostRb: {fileID: 0}
   ghostTrans: {fileID: 0}
-  scareEffect: {fileID: 1264862768999555645, guid: dbf7b6f250b08b2458daf5ea655dee7f,
+  scareEffect: {fileID: 1264862768999555645, guid: 1809e2b829a929d479cfd39ee382a333,
     type: 3}
 --- !u!82 &2320186074025712416
 AudioSource:

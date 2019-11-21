@@ -91,28 +91,8 @@ public class MonsterAI : MonoBehaviour
             return;
         }
 
+        ChangeState(nextState);
 
-        switch (nextState)
-        {
-            case MonsterState.BlockDoor:
-                stateMachine.ChangeState(MonBlockDoorState.Instance);
-                break;
-            case MonsterState.BreakerSwitch:
-                stateMachine.ChangeState(MonBreakerSwitchState.Instance);
-                break;
-            case MonsterState.KillMode:
-                stateMachine.ChangeState(MonKillModeState.Instance);
-                break;
-            case MonsterState.SpawnMinion:
-                stateMachine.ChangeState(MonSpawnMinionState.Instance);
-                break;
-            case MonsterState.Search:
-                stateMachine.ChangeState(MonSearchState.Instance);
-                break;
-            case MonsterState.Idle:
-                stateMachine.ChangeState(MonIdleState.Instance);
-                break;
-        }
     }
 
 
@@ -174,5 +154,34 @@ public class MonsterAI : MonoBehaviour
     {
         Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
 
+    }
+
+    public void ChangeState(MonsterState nextState)
+    {
+        switch (nextState)
+        {
+            case MonsterState.BlockDoor:
+                stateMachine.ChangeState(MonBlockDoorState.Instance);
+                break;
+            case MonsterState.BreakerSwitch:
+                stateMachine.ChangeState(MonBreakerSwitchState.Instance);
+                break;
+            case MonsterState.KillMode:
+                stateMachine.ChangeState(MonKillModeState.Instance);
+                break;
+            case MonsterState.SpawnMinion:
+                stateMachine.ChangeState(MonSpawnMinionState.Instance);
+                break;
+            case MonsterState.Search:
+                stateMachine.ChangeState(MonSearchState.Instance);
+                break;
+            case MonsterState.Intimidate:
+                stateMachine.ChangeState(MonIntimidateState.Instance);
+                break;
+            case MonsterState.Idle:
+                stateMachine.ChangeState(MonIdleState.Instance);
+                break;
+
+        }
     }
 }

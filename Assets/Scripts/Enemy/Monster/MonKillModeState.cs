@@ -11,6 +11,8 @@ public class MonKillModeState : State<MonsterAI>
     private Transform target;
     //State Initialization ***************************
     private static MonKillModeState _instance;
+    private bool startedTimer;
+    private float startTime;
 
     private MonKillModeState()
     {
@@ -55,11 +57,28 @@ public class MonKillModeState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
     }
 
     public override void UpdateState(MonsterAI _owner)
     {
+        if (startedTimer)
+        {
+            Debug.Log(Time.unscaledTime - startTime);
+            if (_owner.GetFovDetection().IsInView())
+            {
+                startedTimer = false;
+            }
+            else if ((Time.unscaledTime - startTime) >= 3)
+            {
+                Debug.Log("IntimidateState");
+                _owner.ChangeState(MonsterAI.MonsterState.Intimidate);
+            }
+        }
+        if (!_owner.GetFovDetection().IsInView() && !startedTimer)
+        {
+            startTime = Time.unscaledTime;
+            startedTimer = true;
+        }
         _owner.target = target.transform;
     }
 }
