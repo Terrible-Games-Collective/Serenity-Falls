@@ -68,10 +68,10 @@ public class MonsterAI : MonoBehaviour
             GoToNextState();
         }
 
-
-
-       
-
+        if (fov.IsInView())
+        {
+            ChangeState(MonsterState.KillMode);
+        }
         ai.destination = target.position;
         stateMachine.Update();
     }

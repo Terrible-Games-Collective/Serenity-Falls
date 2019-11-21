@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5685808971285401903}
   - component: {fileID: 5685808971285401889}
   - component: {fileID: 114769433304757020}
+  - component: {fileID: 8864060872882919655}
   m_Layer: 0
   m_Name: Door
   m_TagString: Interactables
@@ -178,3 +179,17 @@ MonoBehaviour:
   cooldown: 15
   cooldownTimer: 0
   playerInventory: {fileID: 11400000, guid: bcbd4f6f4d6848145bc3a27b84f778c3, type: 2}
+--- !u!114 &8864060872882919655
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5685808971285401893}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2af2d3e2f63e48f9bf73dfd0f2ba2da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openDoorSound: {fileID: 8300000, guid: f2813a6d588d84ec9ab58e23facc196e, type: 3}
+  closeDoorSound: {fileID: 8300000, guid: 7034fe4edfc0a4dd0a12b74791f94983, type: 3}

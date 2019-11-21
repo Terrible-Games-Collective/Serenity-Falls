@@ -45,13 +45,14 @@ public class MonIntimidateState : State<MonsterAI>
     {
         index = 0;
         _owner.currentState = MonsterAI.MonsterState.Intimidate;
+        Debug.Log(_owner.GetMonsterBrain().currentSector.playersRoom);
         _owner.setTargetAsTransform(_owner.GetMonsterBrain().currentSector.playersRoom.moveSpots[index]);
 
     }
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void UpdateState(MonsterAI _owner)

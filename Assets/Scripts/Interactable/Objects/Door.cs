@@ -98,6 +98,7 @@ public class Door : Interactable
         isOpen = true;
         anim.SetBool("opened", true);
         physicsCollider.enabled = false;
+        GetComponent<DoorAudio>().PlaySound(transform.position, true);
         
     }
     public void Close()
@@ -105,6 +106,7 @@ public class Door : Interactable
         isOpen = false;
         anim.SetBool("opened", false);
         physicsCollider.enabled = true;
+        GetComponent<DoorAudio>().PlaySound(transform.position, false);
     }
 
     public void BlockedDoorCooldown()
