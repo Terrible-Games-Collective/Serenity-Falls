@@ -8,17 +8,10 @@ public class Interactable : MonoBehaviour
     public Signal contextOff;
     public bool playerInRange;
     public SpriteRenderer item;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
+    // This handles the triggers when the player goes near an interactable
+    // enable and disables UI -< E button >- 
+    // also change the color
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

@@ -26,6 +26,9 @@ public class Key : Interactable
             GetKey();
         }
     }
+    // removes key gameObject when E'd by the player
+    // +1 to key in inventory
+    // signal KeyUI to update UI
     public void GetKey()
     {
         playerInventory.Key += 1;

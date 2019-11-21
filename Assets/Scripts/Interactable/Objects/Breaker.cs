@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class Breaker : Interactable
 {
+    // GameObject for the BackupLights off at the start
     public GameObject MapLighting;
+    // GameObject for the MapLights on at start
     public GameObject MainLights;
 
     private MonsterBrain monsterBrain;
