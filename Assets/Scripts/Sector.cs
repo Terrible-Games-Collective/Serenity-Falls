@@ -41,6 +41,11 @@ public class Sector : MonoBehaviour
             tempRoom = sectorRooms[i].GetComponent<Room>();
             tempRoom.roomID = i;
         }
+
+        if(playersRoom == null)
+        {
+            playersRoom = sectorRooms[0].GetComponent<Room>();
+        }
     }
 
 
@@ -70,8 +75,6 @@ public class Sector : MonoBehaviour
 
     public void updatePlayersRoom(Room room) {
         playersRoom = room;
-        monsterBrain.updateCurrentSector(this);
-
     }
 
     public GameObject getRandomRoom()

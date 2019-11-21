@@ -45,7 +45,6 @@ public class MonBlockDoorState : State<MonsterAI>
         _owner.currentState = MonsterAI.MonsterState.BlockDoor;
 
         monsterBrain = _owner.GetMonsterBrain();
-
         
 
         door = pickRoomDoor();

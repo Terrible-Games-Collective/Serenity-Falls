@@ -68,11 +68,12 @@ public class MonsterAI : MonoBehaviour
             GoToNextState();
         }
 
-        if (fov.IsInView())
+        if (fov.IsInView() && currentState != MonsterState.KillMode)
         {
             ChangeState(MonsterState.KillMode);
         }
         ai.destination = target.position;
+
         stateMachine.Update();
     }
 
@@ -175,13 +176,14 @@ public class MonsterAI : MonoBehaviour
     public void setTarget(GameObject tar)
     {
         target = tar.GetComponent<Transform>();
-        ai.destination = target.position;
+       // ai.destination = target.position;
     }
 
     public void setTargetAsTransform(Transform tar)
     {
+        
         target = tar;
-        ai.destination = target.position;
+        //ai.destination = target.position;
     }
 
     public void InView(bool seen)

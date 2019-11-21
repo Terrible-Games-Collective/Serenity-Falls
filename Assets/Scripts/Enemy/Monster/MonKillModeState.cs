@@ -53,10 +53,12 @@ public class MonKillModeState : State<MonsterAI>
         }
         _owner.target = target.transform;
         ai.maxSpeed = _owner.killModeSpeed;
+
     }
 
     public override void ExitState(MonsterAI _owner)
     {
+       //Debug.Log("Exited Kill mode");
     }
 
     public override void UpdateState(MonsterAI _owner)
