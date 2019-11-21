@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Flashlight
+  - Battery
+  - Interactables
+  - Monster
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Light Obstacles
+  - Light Sources
+  - Ambient Light
+  - Walls
+  - character
+  - monster
+  - nurse
+  - Sectors
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Background
+    uniqueID: 1390780101
+    locked: 0
+  - name: Floor
+    uniqueID: 3478389679
+    locked: 0
+  - name: Walls
+    uniqueID: 62476259
+    locked: 1
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: MovePoints
+    uniqueID: 2527891641
+    locked: 0

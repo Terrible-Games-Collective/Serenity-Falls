@@ -13,11 +13,17 @@ public class CornerGhostAI : MonoBehaviour
 
     public GameObject scareEffect;
 
+    private MonsterBrain monsterBrain;
+
     // Start is called before the first frame update
     void Start()
     {
         ghostRb = this.GetComponent<Rigidbody2D>();
         ghostTrans = this.GetComponent<Transform>();
+
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
+
+        monsterBrain.minionsSpawned++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -59,7 +65,8 @@ public class CornerGhostAI : MonoBehaviour
     public void jumpscare()
     {
         GameObject scare = Instantiate(scareEffect, transform.position, Quaternion.identity);
-        Destroy(scare, 10f);
+        monsterBrain.minionsSpawned--;
+        Destroy(scare, 8.0f);
         Destroy(gameObject);
     }
 
@@ -72,10 +79,6 @@ public class CornerGhostAI : MonoBehaviour
             {
                 escape();
             }
-        }else if(alreadyDetected)
-        {
-        
-
         }
     }
 }
