@@ -38,7 +38,7 @@ public class MonSpawnMinionState : State<MonsterAI>
 
     Transform spawnPoint;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
     GameObject MinionToSpawn;
 
 
@@ -46,7 +46,7 @@ public class MonSpawnMinionState : State<MonsterAI>
     {
         _owner.currentState = MonsterAI.MonsterState.SpawnMinion;
 
-        monsterBrain = _owner.GetMonster_Manager();
+        monsterBrain = _owner.GetMonsterBrain();
 
         spawnPoint = ChooseSpawnPoint(_owner);
 
@@ -63,7 +63,7 @@ public class MonSpawnMinionState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void UpdateState(MonsterAI _owner)
@@ -102,7 +102,7 @@ public class MonSpawnMinionState : State<MonsterAI>
                 }
 
 
-                return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length + 1)];
+                return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length)];
             }
         }
 

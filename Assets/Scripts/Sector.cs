@@ -76,7 +76,7 @@ public class Sector : MonoBehaviour
 
     public GameObject getRandomRoom()
     {
-        Debug.Log(Random.Range(0, sectorRooms.Length));
+        //Debug.Log(Random.Range(0, sectorRooms.Length));
         return sectorRooms[(int)Random.Range(0, sectorRooms.Length)];
     }
 }

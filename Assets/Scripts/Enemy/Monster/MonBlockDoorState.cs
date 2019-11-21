@@ -38,15 +38,19 @@ public class MonBlockDoorState : State<MonsterAI>
 
     private GameObject door;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.BlockDoor;
 
-        monsterBrain = _owner.GetMonster_Manager();
+        monsterBrain = _owner.GetMonsterBrain();
+
+        
 
         door = pickRoomDoor();
+
+        
 
         _owner.setTarget(door);
 
@@ -56,7 +60,7 @@ public class MonBlockDoorState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 
 
@@ -64,6 +68,7 @@ public class MonBlockDoorState : State<MonsterAI>
     {
         if (_owner.isReachedTarget())
         {
+
             door.GetComponent<Door>().BlockDoor();
 
             _owner.GoToNextState();

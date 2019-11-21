@@ -63,7 +63,7 @@ public class MonKillModeState : State<MonsterAI>
     {
         if (startedTimer)
         {
-            Debug.Log(Time.unscaledTime - startTime);
+            //Debug.Log(Time.unscaledTime - startTime);
             if (_owner.GetFovDetection().IsInView())
             {
                 startedTimer = false;

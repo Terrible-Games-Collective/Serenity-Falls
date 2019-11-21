@@ -37,13 +37,13 @@ public class MonBreakerSwitchState : State<MonsterAI>
     //*************************************************
 
     private GameObject breaker;
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.BreakerSwitch;
 
-        monsterBrain = _owner.GetMonster_Manager();
+        monsterBrain = _owner.GetMonsterBrain();
         breaker = GameObject.Find("Breaker");
 
         _owner.setTarget(breaker);
@@ -52,7 +52,7 @@ public class MonBreakerSwitchState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void UpdateState(MonsterAI _owner)

@@ -6,8 +6,15 @@ public class Breaker : Interactable
 {
     public GameObject MapLighting;
     public GameObject MainLights;
-    // Update is called once per frame
 
+    private MonsterBrain monsterBrain;
+
+    void Start()
+    {
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
+    }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
@@ -37,7 +44,7 @@ public class Breaker : Interactable
             MainLights.SetActive(true);
             MapLighting.SetActive(false);
         }
-        
+        monsterBrain.breakerOn = !monsterBrain.breakerOn;
     }
 
     public void SwitchBreaker()

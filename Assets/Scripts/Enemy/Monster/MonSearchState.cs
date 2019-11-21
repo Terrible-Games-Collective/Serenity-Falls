@@ -10,7 +10,7 @@ public class MonSearchState : State<MonsterAI>
     //State Initialization ***************************
     private static MonSearchState _instance;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     private MonSearchState()
     {
@@ -41,9 +41,9 @@ public class MonSearchState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner) {
 
-		monsterBrain = _owner.GetMonster_Manager();
+		monsterBrain = _owner.GetMonsterBrain();
         Sector sector = monsterBrain.currentSector;
-        Debug.Log(sector);
+        //Debug.Log(sector);
         GameObject gameRoom = sector.getRandomRoom();
         Room room = gameRoom.GetComponent<Room>();
         _owner.setTargetAsTransform(room.moveSpots[0]);
@@ -56,14 +56,7 @@ public class MonSearchState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        if (_owner.GetFovDetection().IsInView())
-        {
-            _owner.InView(true);
-            _owner.GoToNextState();
-        } else
-        {
-            _owner.InView(false);
-        }
+        
 
         if (_owner.isReachedTarget()) {
             _owner.setTargetAsTransform(monsterBrain.currentSector.getRandomRoom().GetComponent<Room>().moveSpots[0]);

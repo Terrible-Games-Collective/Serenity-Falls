@@ -20,7 +20,7 @@ public class MonsterAI : MonoBehaviour
     public Transform target;
     public int idleSeconds;
 
-    public float chaseSpeed;
+    public float normalSpeed;
     public float killModeSpeed;
 
     private FovDetection fov;
@@ -29,7 +29,7 @@ public class MonsterAI : MonoBehaviour
     public GameObject ClownPrefab;
 
 
-    protected MonsterBrain.monster_manager monsterBrain;
+    protected MonsterBrain monsterBrain;
 
     private float startStateTime;
     public int stateChangeInterval = 30;
@@ -43,73 +43,114 @@ public class MonsterAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startStateTime = Time.fixedUnscaledTime;
+        startStateTime = Time.unscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
         fov = GetComponent<FovDetection>();
-        monsterBrain = GetComponent<MonsterBrain>().manager;
+        monsterBrain = GetComponent<MonsterBrain>();
 
 
 
-        stateMachine.ChangeState(MonIdleState.Instance);
+        GoToNextState();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.fixedUnscaledTime - startStateTime > stateChangeInterval) {
-            startStateTime = Time.fixedUnscaledTime;
+
+        //Debug.Log("Timer:"+(Time.unscaledTime - startStateTime));
+        //Debug.Log(stateChangeInterval);
+        //Debug.Log(Time.unscaledTime - startStateTime > stateChangeInterval);
+
+        if (Time.unscaledTime - startStateTime > stateChangeInterval) {
+            startStateTime = Time.unscaledTime;
             searching = !searching;
+            GoToNextState();
         }
 
+
+
+       
 
         ai.destination = target.position;
         stateMachine.Update();
     }
 
-    public MonsterBrain.monster_manager GetMonster_Manager() {
+    public MonsterBrain GetMonsterBrain() {
         return monsterBrain;
     }
 
-    //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
-    public void GoToNextState(bool forceTransition = false)
+    public void checkForPlayer()
     {
-        MonsterState nextState = DecideNextSearchState();
-        //if (searching)
-        //{
-        //    nextState = DecideNextSearchState();
-        //} else
-        //{
-        //    nextState = DecideNextTrapState();
-        //}
-
-        // If forceTransition is true and the current state is deemed the best state the monster will
-        // enter it's current state again, if forceTransition is false and the current state is the best
-        // it will continue what it is doing
-        if (nextState == currentState && !forceTransition)
+        if (fov.IsInView())
         {
-            return;
+            InView(true);
+            GoToNextState();
         }
+        else
+        {
+            InView(false);
+        }
+    }
 
-        ChangeState(nextState);
+    //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
+    public void GoToNextState(bool forceTransition = true)
+    {
+        //Debug.Log("Go To next State");
+        //Debug.Log(searching);
 
+        MonsterState nextState;
+
+
+        if (seenPlayer)
+        {
+            ai.maxSpeed = killModeSpeed;
+            nextState = MonsterState.KillMode;
+        }
+        else
+        {
+            ai.maxSpeed = normalSpeed;
+            if (searching || monsterBrain.keysLeft <= 0)
+            {
+                //Debug.Log("Decided Search");
+                nextState = DecideNextSearchState();
+            }
+            else
+            {
+                //Debug.Log("Decided Trap");
+                nextState = DecideNextTrapState();
+            }
+
+            
+
+            // If forceTransition is true and the current state is deemed the best state the monster will
+            // enter it's current state again, if forceTransition is false and the current state is the best
+            // it will continue what it is doing
+            if (nextState == currentState && !forceTransition)
+            {
+                return;
+            }
+        }
+            ChangeState(nextState);
+        
     }
 
 
     private MonsterState DecideNextSearchState()
     {
-        if (seenPlayer)
-        {
-            ai.maxSpeed = killModeSpeed;
-            return MonsterState.KillMode;
-        }
-        ai.maxSpeed = chaseSpeed;
         return MonsterState.Search;
     }
 
     private MonsterState DecideNextTrapState()
     {
-        return MonsterState.Idle;
+        if (monsterBrain.breakerOn)
+            return MonsterState.BreakerSwitch;
+
+        else if (monsterBrain.minionsSpawned < monsterBrain.blockedDoors && monsterBrain.minionsSpawned < monsterBrain.maxMinions)
+            return MonsterState.SpawnMinion;
+
+        else
+            return MonsterState.BlockDoor;
     }
 
 
@@ -117,7 +158,7 @@ public class MonsterAI : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            //SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2);
             Debug.Log("YOU ARE DEAD");
         }
     }

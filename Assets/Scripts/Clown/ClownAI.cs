@@ -9,11 +9,16 @@ public class ClownAI : MonoBehaviour
 
     public GameObject clownScare;
 
+    private MonsterBrain monsterBrain;
+
     // Start is called before the first frame update
     void Start()
     {
         clownTrans = this.GetComponent<Transform>();
 
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
+
+        monsterBrain.minionsSpawned++;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

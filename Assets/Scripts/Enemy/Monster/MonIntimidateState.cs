@@ -45,7 +45,7 @@ public class MonIntimidateState : State<MonsterAI>
     {
         index = 0;
         _owner.currentState = MonsterAI.MonsterState.Intimidate;
-        _owner.setTargetAsTransform(_owner.GetMonster_Manager().currentSector.playersRoom.moveSpots[index]);
+        _owner.setTargetAsTransform(_owner.GetMonsterBrain().currentSector.playersRoom.moveSpots[index]);
 
     }
 
@@ -56,7 +56,7 @@ public class MonIntimidateState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        Transform[] moveSpots = _owner.GetMonster_Manager().currentSector.playersRoom.moveSpots;
+        Transform[] moveSpots = _owner.GetMonsterBrain().currentSector.playersRoom.moveSpots;
         if (_owner.isReachedTarget()){
             if(index+1 < moveSpots.Length)
             {

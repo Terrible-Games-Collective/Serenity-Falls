@@ -17,7 +17,7 @@ public class Door : Interactable
     public BoxCollider2D physicsCollider;
     public Signal KeySignal;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     // blocked door
     public float cooldown;
@@ -32,7 +32,7 @@ public class Door : Interactable
     {
         anim = GetComponent<Animator>();
 
-        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterAI>().GetMonster_Manager();
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
     }
     private void Update()
     {
