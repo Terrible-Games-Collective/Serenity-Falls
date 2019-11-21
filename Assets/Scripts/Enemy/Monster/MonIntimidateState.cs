@@ -40,6 +40,10 @@ public class MonIntimidateState : State<MonsterAI>
     //*************************************************
 
 
+    //This state will go to the room the player awas last in and the search it 
+    //After it has searched all the points it will go to the next state.
+
+
     private MonsterBrain monsterBrain;
     private Room playerRoom;
     private Transform[] moveSpots;

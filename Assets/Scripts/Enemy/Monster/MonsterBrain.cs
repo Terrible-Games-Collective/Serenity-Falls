@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class MonsterBrain : MonoBehaviour
 {
-    public Sector startingSector;
 
+
+
+    //Data updated by other objects that contains the game state
+    //Info will be selecteivly fed to the monster at different intervals
+    public Sector startingSector;
 
     public int keysLeft;
     public int blockedDoors;
@@ -36,10 +40,13 @@ public class MonsterBrain : MonoBehaviour
        
     }
 
+    //Updates the current sector that the player is in
     public void updateCurrentSector(Sector sector) {
         currentSector = sector;
     }
 
+
+    //returns a sector that still contains a key
     public Sector GetSectorWithKey()
     {
         for (int i = 1; i < allSectors.Length; i++)

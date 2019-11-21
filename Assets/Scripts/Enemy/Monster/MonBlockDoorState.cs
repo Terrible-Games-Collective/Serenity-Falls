@@ -36,6 +36,10 @@ public class MonBlockDoorState : State<MonsterAI>
     }
     //*************************************************
 
+
+    //The monster will select a door to block and block that door
+
+
     private GameObject door;
 
     private MonsterBrain monsterBrain;

@@ -37,7 +37,7 @@ public class MonSearchState : State<MonsterAI>
     }
     //*************************************************
 
-
+    //The monster will search the sector for the player
 
     public override void EnterState(MonsterAI _owner) {
 

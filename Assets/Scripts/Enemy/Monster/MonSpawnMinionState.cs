@@ -36,6 +36,11 @@ public class MonSpawnMinionState : State<MonsterAI>
     }
     //*************************************************
 
+
+
+    //The monster will spawn a minion to jumpscare the player
+
+
     Transform spawnPoint;
 
     private MonsterBrain monsterBrain;
@@ -93,9 +98,10 @@ public class MonSpawnMinionState : State<MonsterAI>
                 sector = monsterBrain.allSectors[i];
                 tempRoom = sector.getRandomRoom().GetComponent<Room>();
 
-                if (monsterBrain.allSectors[i].containsGirl == false)
+                if (monsterBrain.allSectors[i].containsGirl == false) //Right now will only spawn corner girl
                 {
                     MinionToSpawn = _owner.CornerGirlPrefab;
+
                 }
                 else
                 {

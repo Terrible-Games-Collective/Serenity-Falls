@@ -57,17 +57,14 @@ public class MonsterAI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //Debug.Log("Timer:"+(Time.unscaledTime - startStateTime));
-        //Debug.Log(stateChangeInterval);
-        //Debug.Log(Time.unscaledTime - startStateTime > stateChangeInterval);
-
+        //If the mode switch timer is done then switch modes and pick a new state.
         if (Time.unscaledTime - startStateTime > stateChangeInterval) {
             startStateTime = Time.unscaledTime;
             searching = !searching;
             GoToNextState();
         }
 
+        //If the player has been spotted go kill 
         if (fov.IsInView() && currentState != MonsterState.KillMode)
         {
             ChangeState(MonsterState.KillMode);
@@ -77,10 +74,15 @@ public class MonsterAI : MonoBehaviour
         stateMachine.Update();
     }
 
+
+    //Deprecated
+    //Will return the monsterbrain component
     public MonsterBrain GetMonsterBrain() {
         return monsterBrain;
     }
 
+
+    //Checks if the player has been seen
     public void checkForPlayer()
     {
         if (fov.IsInView())
@@ -94,11 +96,11 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
+
+    //Used to transition the monster to a new state
     //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
     public void GoToNextState(bool forceTransition = true)
     {
-        //Debug.Log("Go To next State");
-        //Debug.Log(searching);
 
         MonsterState nextState;
 
@@ -136,12 +138,14 @@ public class MonsterAI : MonoBehaviour
         
     }
 
-
+    //Descision tree for search state, currently will always start in search
     private MonsterState DecideNextSearchState()
     {
         return MonsterState.Search;
     }
 
+
+    //Decides the next trap state to go into
     private MonsterState DecideNextTrapState()
     {
         if (monsterBrain.breakerOn)
@@ -155,6 +159,7 @@ public class MonsterAI : MonoBehaviour
     }
 
 
+    //Triggers game over state when the player touches the monster
     void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
@@ -164,21 +169,28 @@ public class MonsterAI : MonoBehaviour
         }
     }
 
+    //Used to check if the monster has reached its current target
     public bool isReachedTarget() {
         return (Vector2.Distance(transform.position, target.position) < 0.5f);
     }
 
+    //Returns the fov script of the monster
     public FovDetection GetFovDetection()
     {
         return fov;
     }
 
+
+    //Deprecated
+    //Sets the monsters target to the given game object
     public void setTarget(GameObject tar)
     {
         target = tar.GetComponent<Transform>();
        // ai.destination = target.position;
     }
 
+    //Deprecated
+    //Sets the monsters target to the given transform
     public void setTargetAsTransform(Transform tar)
     {
         
@@ -186,6 +198,7 @@ public class MonsterAI : MonoBehaviour
         //ai.destination = target.position;
     }
 
+    //Function to check if player is in view
     public void InView(bool seen)
     {
         if(seen != seenPlayer)
@@ -193,12 +206,18 @@ public class MonsterAI : MonoBehaviour
             seenPlayer = seen;
         }
     }
+
+
+
+    //Spawns the given mini monster at the given location
     public void SpawnMinion(GameObject minionPrefab, Transform location)
     {
         Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
 
     }
 
+
+    //Actually changes the monsters state to the given state, useful to force a state change to a specific state
     public void ChangeState(MonsterState nextState)
     {
         switch (nextState)

@@ -40,6 +40,8 @@ public class MonKillModeState : State<MonsterAI>
     //*************************************************
 
 
+    //This state will follow the player until it kills them or they break line of sight for 3 seconds
+    //Breaking line of sight will 3 seconds will transition to intimidate mode
 
     public override void EnterState(MonsterAI _owner)
     {

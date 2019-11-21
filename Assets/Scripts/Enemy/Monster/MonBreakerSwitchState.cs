@@ -36,6 +36,8 @@ public class MonBreakerSwitchState : State<MonsterAI>
     }
     //*************************************************
 
+    //The monster will go turn the breaker back off if the player has activated it
+
     private GameObject breaker;
     private MonsterBrain monsterBrain;
 
