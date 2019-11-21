@@ -88,6 +88,7 @@ public class FovDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Target = GameObject.FindWithTag("Player").transform;
         isInField = inFieldView(transform, Target, maxAngle, maxRadius);
     }
 
