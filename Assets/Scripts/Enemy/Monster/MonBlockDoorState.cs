@@ -36,19 +36,26 @@ public class MonBlockDoorState : State<MonsterAI>
     }
     //*************************************************
 
+
+    //The monster will select a door to block and block that door
+
+
     private GameObject door;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.BlockDoor;
 
-        monsterBrain = _owner.GetMonster_Manager();
+        monsterBrain = _owner.GetMonsterBrain();
+        
 
         door = pickRoomDoor();
 
-        _owner.setTarget(door);
+       
+        _owner.target = door.transform;
+
 
 
 
@@ -56,7 +63,7 @@ public class MonBlockDoorState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 
 
@@ -64,6 +71,7 @@ public class MonBlockDoorState : State<MonsterAI>
     {
         if (_owner.isReachedTarget())
         {
+
             door.GetComponent<Door>().BlockDoor();
 
             _owner.GoToNextState();
@@ -86,9 +94,9 @@ public class MonBlockDoorState : State<MonsterAI>
 
             //If there are no keys left it will go to block doors in the players section, else pick a sector that still has a key
             if (sector == null)
-                tempRoom = monsterBrain.currentSector.getRandomRoom();
+                tempRoom = monsterBrain.currentSector.getRandomRoom().GetComponent<Room>();
             else
-                tempRoom = sector.getRandomRoom();
+                tempRoom = sector.getRandomRoom().GetComponent<Room>();
 
 
             if (tempRoom.doors.Length != 0)

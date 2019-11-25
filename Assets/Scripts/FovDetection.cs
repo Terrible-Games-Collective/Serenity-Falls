@@ -44,7 +44,7 @@ public class FovDetection : MonoBehaviour
     //Target: Object enemy is searching for
     public bool inFieldView(Transform MainEnemy, Transform target, float MaxAngle, float MaxRadius)
     {
-        int layerMask = 12 << 14;
+        int layerMask = (1<<11)|(1<<12);
         //Grab all objects that overlap with the FOV Radius
         //if there is more then 100 items this could cause overflow
         Collider2D[] withinRadius = new Collider2D[100];
@@ -88,6 +88,7 @@ public class FovDetection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Target = GameObject.FindWithTag("Player").transform;
         isInField = inFieldView(transform, Target, maxAngle, maxRadius);
     }
 

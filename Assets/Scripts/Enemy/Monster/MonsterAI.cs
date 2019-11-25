@@ -9,7 +9,7 @@ public class MonsterAI : MonoBehaviour
 {
     //State Machine Stuff****************
     //Enum to keep track of state
-    public enum MonsterState { Idle, Intimidate, Stalk, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
+    public enum MonsterState { Idle, Intimidate, Search, BlockDoor,  BreakerSwitch, SpawnMinion, KillMode };
     public MonsterState currentState;
 
     public StateMachine<MonsterAI> stateMachine { get; set; }//Instance of the StateMachine class
@@ -20,14 +20,21 @@ public class MonsterAI : MonoBehaviour
     public Transform target;
     public int idleSeconds;
 
-    public float chaseSpeed;
+    public float normalSpeed;
     public float killModeSpeed;
 
-    protected MonsterBrain.monster_manager monsterBrain;
+    private FovDetection fov;
+
+    public GameObject CornerGirlPrefab;
+    public GameObject ClownPrefab;
+
+
+    protected MonsterBrain monsterBrain;
 
     private float startStateTime;
     public int stateChangeInterval = 30;
     private bool searching;
+    private bool seenPlayer;
 
 
 
@@ -36,54 +43,183 @@ public class MonsterAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        startStateTime = Time.fixedUnscaledTime;
+        startStateTime = Time.unscaledTime;
         stateMachine = new StateMachine<MonsterAI>(this);
         ai = GetComponent<IAstarAI>();
-        monsterBrain = GetComponent<MonsterBrain>().manager;
+        fov = GetComponent<FovDetection>();
+        monsterBrain = GetComponent<MonsterBrain>();
 
 
 
-        stateMachine.ChangeState(MonIdleState.Instance);
+        GoToNextState();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Time.fixedUnscaledTime - startStateTime > stateChangeInterval) {
+        //If the mode switch timer is done then switch modes and pick a new state.
+        if (Time.unscaledTime - startStateTime > stateChangeInterval) {
+            startStateTime = Time.unscaledTime;
+            searching = !searching;
             GoToNextState();
-            startStateTime = Time.fixedUnscaledTime;
         }
 
-
+        //If the player has been spotted go kill 
+        if (fov.IsInView() && currentState != MonsterState.KillMode)
+        {
+            ChangeState(MonsterState.KillMode);
+        }
         ai.destination = target.position;
+
         stateMachine.Update();
     }
 
-    public MonsterBrain.monster_manager GetMonster_Manager() {
+
+    //Deprecated
+    //Will return the monsterbrain component
+    public MonsterBrain GetMonsterBrain() {
         return monsterBrain;
     }
 
-    //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
-    public void GoToNextState(bool forceTransition = false)
+
+    //Checks if the player has been seen
+    public void checkForPlayer()
     {
+        if (fov.IsInView())
+        {
+            InView(true);
+            GoToNextState();
+        }
+        else
+        {
+            InView(false);
+        }
+    }
+
+
+    //Used to transition the monster to a new state
+    //Set forceTransition to true if you want the monster to stop what it is doing and go to the next state
+    public void GoToNextState(bool forceTransition = true)
+    {
+
         MonsterState nextState;
-        if (searching)
+
+
+        if (seenPlayer)
         {
-            nextState = DecideNextSearchState();
-        } else
-        {
-            nextState = DecideNextTrapState();
+            ai.maxSpeed = killModeSpeed;
+            nextState = MonsterState.KillMode;
         }
-
-        // If forceTransition is true and the current state is deemed the best state the monster will
-        // enter it's current state again, if forceTransition is false and the current state is the best
-        // it will continue what it is doing
-        if (nextState == currentState && !forceTransition) 
+        else
         {
-            return;
+            ai.maxSpeed = normalSpeed;
+            if (searching || monsterBrain.keysLeft <= 0)
+            {
+                //Debug.Log("Decided Search");
+                nextState = DecideNextSearchState();
+            }
+            else
+            {
+                //Debug.Log("Decided Trap");
+                nextState = DecideNextTrapState();
+            }
+
+            
+
+            // If forceTransition is true and the current state is deemed the best state the monster will
+            // enter it's current state again, if forceTransition is false and the current state is the best
+            // it will continue what it is doing
+            if (nextState == currentState && !forceTransition)
+            {
+                return;
+            }
         }
+            ChangeState(nextState);
+        
+    }
+
+    //Descision tree for search state, currently will always start in search
+    private MonsterState DecideNextSearchState()
+    {
+        return MonsterState.Search;
+    }
 
 
+    //Decides the next trap state to go into
+    private MonsterState DecideNextTrapState()
+    {
+        if (monsterBrain.breakerOn)
+            return MonsterState.BreakerSwitch;
+
+        else if (monsterBrain.minionsSpawned < monsterBrain.blockedDoors && monsterBrain.minionsSpawned < monsterBrain.maxMinions)
+            return MonsterState.SpawnMinion;
+
+        else
+            return MonsterState.BlockDoor;
+    }
+
+
+    //Triggers game over state when the player touches the monster
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(2);
+            Debug.Log("YOU ARE DEAD");
+        }
+    }
+
+    //Used to check if the monster has reached its current target
+    public bool isReachedTarget() {
+        return (Vector2.Distance(transform.position, target.position) < 0.5f);
+    }
+
+    //Returns the fov script of the monster
+    public FovDetection GetFovDetection()
+    {
+        return fov;
+    }
+
+
+    //Deprecated
+    //Sets the monsters target to the given game object
+    public void setTarget(GameObject tar)
+    {
+        target = tar.GetComponent<Transform>();
+       // ai.destination = target.position;
+    }
+
+    //Deprecated
+    //Sets the monsters target to the given transform
+    public void setTargetAsTransform(Transform tar)
+    {
+        
+        target = tar;
+        //ai.destination = target.position;
+    }
+
+    //Function to check if player is in view
+    public void InView(bool seen)
+    {
+        if(seen != seenPlayer)
+        {
+            seenPlayer = seen;
+        }
+    }
+
+
+
+    //Spawns the given mini monster at the given location
+    public void SpawnMinion(GameObject minionPrefab, Transform location)
+    {
+        Instantiate(minionPrefab, new Vector3(transform.position.x, transform.position.y), location.rotation);
+
+    }
+
+
+    //Actually changes the monsters state to the given state, useful to force a state change to a specific state
+    public void ChangeState(MonsterState nextState)
+    {
         switch (nextState)
         {
             case MonsterState.BlockDoor:
@@ -98,54 +234,16 @@ public class MonsterAI : MonoBehaviour
             case MonsterState.SpawnMinion:
                 stateMachine.ChangeState(MonSpawnMinionState.Instance);
                 break;
-            case MonsterState.Stalk:
-                stateMachine.ChangeState(MonStalkState.Instance);
+            case MonsterState.Search:
+                stateMachine.ChangeState(MonSearchState.Instance);
+                break;
+            case MonsterState.Intimidate:
+                stateMachine.ChangeState(MonIntimidateState.Instance);
                 break;
             case MonsterState.Idle:
                 stateMachine.ChangeState(MonIdleState.Instance);
                 break;
+
         }
-    }
-
-
-    private MonsterState DecideNextSearchState()
-    {
-        return MonsterState.Idle;
-    }
-
-    private MonsterState DecideNextTrapState()
-    {
-        return MonsterState.Idle;
-    }
-
-
-    void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            //SceneManager.LoadScene(2);
-            Debug.Log("YOU ARE DEAD");
-        }
-    }
-
-    public bool isReachedTarget() {
-        return (Vector2.Distance(transform.position, target.position) < 0.5f);
-    }
-
-    public FovDetection GetFovDetection()
-    {
-        return GetComponent<FovDetection>();
-    }
-
-    public void setTarget(GameObject tar)
-    {
-        target = tar.GetComponent<Transform>();
-        ai.destination = target.position;
-    }
-
-    public void setTargetAsTransform(Transform tar)
-    {
-        target = tar;
-        ai.destination = target.position;
     }
 }

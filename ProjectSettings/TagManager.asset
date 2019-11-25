@@ -22,9 +22,10 @@ TagManager:
   - Ambient Light
   - Walls
   - Rooms
+  - character
   - monster
   - nurse
-  - 
+  - Sectors
   - 
   - 
   - 

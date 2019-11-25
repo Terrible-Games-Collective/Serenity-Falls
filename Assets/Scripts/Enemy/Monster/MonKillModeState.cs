@@ -11,6 +11,8 @@ public class MonKillModeState : State<MonsterAI>
     private Transform target;
     //State Initialization ***************************
     private static MonKillModeState _instance;
+    private bool startedTimer;
+    private float startTime;
 
     private MonKillModeState()
     {
@@ -38,6 +40,8 @@ public class MonKillModeState : State<MonsterAI>
     //*************************************************
 
 
+    //This state will follow the player until it kills them or they break line of sight for 3 seconds
+    //Breaking line of sight will 3 seconds will transition to intimidate mode
 
     public override void EnterState(MonsterAI _owner)
     {
@@ -51,15 +55,32 @@ public class MonKillModeState : State<MonsterAI>
         }
         _owner.target = target.transform;
         ai.maxSpeed = _owner.killModeSpeed;
+
     }
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+       //Debug.Log("Exited Kill mode");
     }
 
     public override void UpdateState(MonsterAI _owner)
     {
+        if (startedTimer)
+        {
+            if (_owner.GetFovDetection().IsInView())
+            {
+                startedTimer = false;
+            }
+            else if ((Time.unscaledTime - startTime) >= 3)
+            {
+                _owner.ChangeState(MonsterAI.MonsterState.Intimidate);
+            }
+        }
+        if (!_owner.GetFovDetection().IsInView() && !startedTimer)
+        {
+            startTime = Time.unscaledTime;
+            startedTimer = true;
+        }
         _owner.target = target.transform;
     }
 }

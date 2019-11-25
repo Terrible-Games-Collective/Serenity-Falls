@@ -36,28 +36,32 @@ public class MonSpawnMinionState : State<MonsterAI>
     }
     //*************************************************
 
+
+
+    //The monster will spawn a minion to jumpscare the player
+
+
     Transform spawnPoint;
 
-    private MonsterBrain.monster_manager monsterBrain;
-
-    GameObject CornerGirlPrefab;
-    GameObject ClownPrefab;
+    private MonsterBrain monsterBrain;
+    GameObject MinionToSpawn;
 
 
     public override void EnterState(MonsterAI _owner)
     {
         _owner.currentState = MonsterAI.MonsterState.SpawnMinion;
 
-        monsterBrain = _owner.GetMonster_Manager();
+        monsterBrain = _owner.GetMonsterBrain();
 
-        spawnPoint = ChooseSpawnPoint();
+        spawnPoint = ChooseSpawnPoint(_owner);
 
         if (spawnPoint == null)
         {
             _owner.GoToNextState();
         }
 
-        _owner.setTargetAsTransform(spawnPoint);
+        //_owner.setTargetAsTransform(spawnPoint);
+        _owner.target = spawnPoint;
 
 
 
@@ -65,24 +69,22 @@ public class MonSpawnMinionState : State<MonsterAI>
 
     public override void ExitState(MonsterAI _owner)
     {
-        throw new System.NotImplementedException();
+        
     }
 
     public override void UpdateState(MonsterAI _owner)
     {
         if (_owner.isReachedTarget())
         {
-            
             //Spawn prefab at location
             //Will need to add bit to minion scripts to increment the count.
-            //Instantiate(CornerGirlPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            //Instantiate(ClownPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            _owner.SpawnMinion(MinionToSpawn, spawnPoint);
 
             _owner.GoToNextState();
         }
     }
 
-    public Transform ChooseSpawnPoint()
+    public Transform ChooseSpawnPoint(MonsterAI _owner)
     {
 
         Room tempRoom;
@@ -94,8 +96,20 @@ public class MonSpawnMinionState : State<MonsterAI>
             if(monsterBrain.allSectors[i].containsClown == false || monsterBrain.allSectors[i].containsGirl == false)
             {
                 sector = monsterBrain.allSectors[i];
-                tempRoom = sector.getRandomRoom();
-                return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length + 1)];
+                tempRoom = sector.getRandomRoom().GetComponent<Room>();
+
+                if (monsterBrain.allSectors[i].containsGirl == false) //Right now will only spawn corner girl
+                {
+                    MinionToSpawn = _owner.CornerGirlPrefab;
+
+                }
+                else
+                {
+                    MinionToSpawn = _owner.ClownPrefab;
+                }
+
+
+                return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length)];
             }
         }
 

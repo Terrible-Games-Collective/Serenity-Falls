@@ -17,7 +17,7 @@ public class Door : Interactable
     public BoxCollider2D physicsCollider;
     public Signal KeySignal;
 
-    private MonsterBrain.monster_manager monsterBrain;
+    private MonsterBrain monsterBrain;
 
     // blocked door
     public float cooldown;
@@ -30,9 +30,10 @@ public class Door : Interactable
     public Inventory playerInventory;
     private void Start()
     {
+        // animation for the doors
         anim = GetComponent<Animator>();
 
-        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterAI>().GetMonster_Manager();
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
     }
     private void Update()
     {
@@ -44,6 +45,9 @@ public class Door : Interactable
             }
             else
             {
+                // need 3 keys to open locked door and the door type has to be locked
+                // inventory will remove 3 keys and signal KeyUI to update keys on screen
+                // change the door type to normal when its unlocked
                 if ((thisDoorType == DoorType.locked) && (playerInventory.Key == 3))
                 {
                     playerInventory.Key -= 3;
@@ -95,21 +99,28 @@ public class Door : Interactable
 
     public void Open()
     {
+        // opens the door by just removing collider and animation
         isOpen = true;
         anim.SetBool("opened", true);
         physicsCollider.enabled = false;
+        GetComponent<DoorAudio>().PlaySound(transform.position, true);
         
     }
     public void Close()
     {
+        // close the door by enabling collider and doing the animation
         isOpen = false;
         anim.SetBool("opened", false);
         physicsCollider.enabled = true;
+        GetComponent<DoorAudio>().PlaySound(transform.position, false);
     }
 
     public void BlockedDoorCooldown()
-    { 
-        
+    {
+        // cooldown for the door and set door type to blocked
+        // cooldown timer goes down until 0 then door type became unblocked
+        // also changed the color of the door when blocked
+
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;

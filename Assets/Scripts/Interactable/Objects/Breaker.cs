@@ -4,10 +4,19 @@ using UnityEngine;
 
 public class Breaker : Interactable
 {
+    // GameObject for the BackupLights off at the start
     public GameObject MapLighting;
+    // GameObject for the MapLights on at start
     public GameObject MainLights;
-    // Update is called once per frame
 
+    private MonsterBrain monsterBrain;
+
+    void Start()
+    {
+        monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
+    }
+
+    // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
@@ -37,7 +46,7 @@ public class Breaker : Interactable
             MainLights.SetActive(true);
             MapLighting.SetActive(false);
         }
-        
+        monsterBrain.breakerOn = !monsterBrain.breakerOn;
     }
 
     public void SwitchBreaker()
