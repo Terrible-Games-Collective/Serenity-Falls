@@ -28,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1264862768999555645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.97, y: -19.31, z: -0.1953125}
-  m_LocalScale: {x: 1.717, y: 1.675, z: 1}
+  m_LocalPosition: {x: 3.472, y: -17.083, z: 0}
+  m_LocalScale: {x: 1.7955356, y: 1.6354566, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ac3363f4251567d47a1ea2d31c3f1153, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7754f6e2957fc7408fbf2c6640335cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -103,7 +103,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
-  MaxDistance: 500
+  MaxDistance: 20
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
