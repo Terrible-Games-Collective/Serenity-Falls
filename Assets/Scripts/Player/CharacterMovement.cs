@@ -81,6 +81,6 @@ public class CharacterMovement : MonoBehaviour
         {
             rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
         }
-        Debug.Log(runBoost);
+        //Debug.Log(runBoost);
     }
 }
