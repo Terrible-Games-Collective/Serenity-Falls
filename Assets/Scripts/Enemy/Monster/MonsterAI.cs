@@ -132,7 +132,7 @@ public class MonsterAI : MonoBehaviour
                 return;
             }
         }
-            ChangeState(nextState);
+        ChangeState(nextState);
         
     }
 
@@ -144,10 +144,10 @@ public class MonsterAI : MonoBehaviour
 
     private MonsterState DecideNextTrapState()
     {
-        if (monsterBrain.breakerOn)
-            return MonsterState.BreakerSwitch;
+       // if (monsterBrain.breakerOn)
+            //return MonsterState.BreakerSwitch;
 
-        else if (monsterBrain.minionsSpawned < monsterBrain.blockedDoors && monsterBrain.minionsSpawned < monsterBrain.maxMinions)
+        if (monsterBrain.minionsSpawned <= monsterBrain.blockedDoors && monsterBrain.minionsSpawned < monsterBrain.maxMinions)
             return MonsterState.SpawnMinion;
 
         else

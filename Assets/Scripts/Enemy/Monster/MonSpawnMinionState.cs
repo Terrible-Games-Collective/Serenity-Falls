@@ -86,28 +86,22 @@ public class MonSpawnMinionState : State<MonsterAI>
         Sector sector;
 
 
-        for(int i = 0; i < 4; i++)
+        int i = Random.Range(0, 4); //choose random sector
+        int type = Random.Range(0, 2); //randomly choose type of monster
+           
+        sector = monsterBrain.allSectors[i];
+        tempRoom = sector.getRandomRoom().GetComponent<Room>();
+
+        if (type == 0)
         {
-            if(monsterBrain.allSectors[i].containsClown == false || monsterBrain.allSectors[i].containsGirl == false)
-            {
-                sector = monsterBrain.allSectors[i];
-                tempRoom = sector.getRandomRoom().GetComponent<Room>();
-
-                if (monsterBrain.allSectors[i].containsGirl == false)
-                {
-                    MinionToSpawn = _owner.CornerGirlPrefab;
-                }
-                else
-                {
-                    MinionToSpawn = _owner.ClownPrefab;
-                }
-
-
-                return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length)];
-            }
+            MinionToSpawn = _owner.CornerGirlPrefab;
+        }
+        else
+        {
+            MinionToSpawn = _owner.ClownPrefab;
         }
 
 
-        return null;
+        return tempRoom.moveSpots[Random.Range(0, tempRoom.moveSpots.Length)];
     }
 }

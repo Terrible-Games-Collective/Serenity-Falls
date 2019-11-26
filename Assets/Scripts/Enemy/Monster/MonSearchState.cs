@@ -41,7 +41,8 @@ public class MonSearchState : State<MonsterAI>
 
     public override void EnterState(MonsterAI _owner) {
 
-		monsterBrain = _owner.GetMonsterBrain();
+        _owner.currentState = MonsterAI.MonsterState.Search;
+        monsterBrain = _owner.GetMonsterBrain();
         Sector sector = monsterBrain.currentSector;
         //Debug.Log(sector);
         GameObject gameRoom = sector.getRandomRoom();

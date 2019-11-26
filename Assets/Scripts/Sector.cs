@@ -17,9 +17,6 @@ public class Sector : MonoBehaviour
     public Room playersRoom;
     public bool containsPlayer;
 
-    public bool containsClown;
-    public bool containsGirl;
-
 
 
     // Start is called before the first frame update
