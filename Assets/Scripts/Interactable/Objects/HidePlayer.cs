@@ -54,6 +54,7 @@ public class HidePlayer : Interactable
         player.transform.position = new Vector2(hidingObject.transform.position.x, hidingObject.transform.position.y);
         player.SetActive(false);
         cam.orthographicSize = 2;
+        lightUI.SetActive(false);
     }
     // unhide() will change state of player to not hiding
     // and teleport to its postion when it went to hiding
@@ -64,6 +65,7 @@ public class HidePlayer : Interactable
         player.transform.position = prevPos;
         player.SetActive(true);
         cam.orthographicSize = 10;
+        lightUI.SetActive(true);
     }
     // catch the player if its hiding and reverse what is done in hide()
     public void MonsterCatch()

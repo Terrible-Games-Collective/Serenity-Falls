@@ -8,6 +8,7 @@ public class Interactable : MonoBehaviour
     public Signal contextOff;
     public bool playerInRange;
     public SpriteRenderer item;
+    public GameObject lightUI;
     
     // This handles the triggers when the player goes near an interactable
     // enable and disables UI -< E button >- 
@@ -23,6 +24,7 @@ public class Interactable : MonoBehaviour
             if (item.color != Color.red)
             {
                 item.color = Color.green;
+                lightUI.SetActive(true);
             }
             
         }
@@ -36,6 +38,7 @@ public class Interactable : MonoBehaviour
             if (item.color != Color.red)
             {
                 item.color = Color.white;
+                lightUI.SetActive(false);
             }
             
         }
