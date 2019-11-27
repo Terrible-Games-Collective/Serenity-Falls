@@ -16,7 +16,7 @@ public class Door : Interactable
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
     public Signal KeySignal;
-
+    public Signal DoorSignal;
     private MonsterBrain monsterBrain;
 
     // blocked door
@@ -54,6 +54,9 @@ public class Door : Interactable
                     KeySignal.Raise();
                     thisDoorType = DoorType.normal;
                     Open();
+                }
+                else if ((thisDoorType == DoorType.locked) && (playerInventory.Key < 3)){
+                    DoorSignal.Raise();
                 }
                 else if (thisDoorType == DoorType.normal)
                 {
