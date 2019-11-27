@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Target: {fileID: 0}
-  maxAngle: 45
+  maxAngle: 70
   maxRadius: 8
 --- !u!114 &1675775320283706214
 MonoBehaviour:
@@ -260,7 +260,7 @@ Transform:
   m_GameObject: {fileID: 9066239010485529278}
   m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -0, y: 0.03, z: 0.50479555}
-  m_LocalScale: {x: 1.32, y: 6.46, z: 0.50479555}
+  m_LocalScale: {x: 1.23, y: 8.66, z: 0.50479555}
   m_Children: []
   m_Father: {fileID: 1675775320283706233}
   m_RootOrder: 0

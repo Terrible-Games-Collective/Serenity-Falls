@@ -8,6 +8,7 @@ TagManager:
   - Battery
   - Interactables
   - Monster
+  - MapLighting
   layers:
   - Default
   - TransparentFX
