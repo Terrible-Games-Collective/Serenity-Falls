@@ -22,7 +22,7 @@ public class PatrolAI : MonoBehaviour
     //Used for testing timer switch
     private float gameTimer;
     private int seconds = 0;
-    public int stateSeconds;
+    public int giveUpTime = 3; //How long the nurse will chase a player if the player has broken line of sight
     private string currentState;
 
     FovDetection fov;
@@ -62,28 +62,33 @@ public class PatrolAI : MonoBehaviour
     private void Update()
     {
 
-        //waits until stateSeconds has passed before switching states
-        //if (Time.time > gameTimer + 1)
-        //{
-        //    gameTimer = Time.time;
-        //    seconds++;
-        //    //Debug.Log(seconds);
-        //}
-
-        //if (seconds == stateSeconds)
-        //{
-        //    seconds = 0;
-        //    chasePlayer = !chasePlayer;
-        //}
         if (currentState != "chase" && fov.IsInView())
         {
             currentState = "chase";
             ai.maxSpeed = chaseSpeed;
             stateMachine.ChangeState(EnemyChaseState.Instance);
-        } else if (currentState != "patrol" && !fov.IsInView()) {
-            currentState = "patrol";
-            ai.maxSpeed = patrolSpeed;
-            stateMachine.ChangeState(EnemyPatrolState.Instance);
+        }
+        else if (currentState != "patrol" && !fov.IsInView()) {
+
+            if (Time.time > gameTimer + 1)
+            {
+                gameTimer = Time.time;
+                seconds++;
+                //Debug.Log(seconds);
+            }
+
+            if (seconds == giveUpTime)
+            {
+                seconds = 0;
+                
+                currentState = "patrol";
+                ai.maxSpeed = patrolSpeed;
+                stateMachine.ChangeState(EnemyPatrolState.Instance);
+            }
+        }
+        else if( currentState != "patrol" && fov.IsInView())
+        {
+            seconds = 0;
         }
         ai.destination = target.position;
         stateMachine.Update();
