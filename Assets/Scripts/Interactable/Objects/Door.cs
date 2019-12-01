@@ -28,6 +28,9 @@ public class Door : Interactable
     // for locked doors
     public Inventory playerInventory;
 
+    // auto close after enemy open door
+    private float cdd = 1;
+    private float cddt = 0;
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -36,6 +39,7 @@ public class Door : Interactable
     }
     private void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
             if (isOpen)
@@ -80,6 +84,18 @@ public class Door : Interactable
             }
 
         }
+        else if (enemyInrange && thisDoorType == DoorType.normal)
+        {
+            if (!isOpen)
+            {
+                cddt = cdd;
+                Open();
+            }
+
+        }
+        
+        AutoClose();
+        
         BlockedDoorCooldown();
     }
 
@@ -109,7 +125,7 @@ public class Door : Interactable
         anim.SetBool("opened", true);
         physicsCollider.enabled = false;
         GetComponent<DoorAudio>().PlaySound(transform.position, true);
-        
+
     }
     // close the door and set state to false also do animations and sound
     public void Close()
@@ -124,8 +140,8 @@ public class Door : Interactable
     // counts down until 0 and then set door back to normal
     // also highlights green if player in range
     public void BlockedDoorCooldown()
-    { 
-        
+    {
+
         if (cooldownTimer > 0)
         {
             cooldownTimer -= Time.deltaTime;
@@ -149,7 +165,7 @@ public class Door : Interactable
                     item.color = Color.red;
                     lightUIR.SetActive(true);
                 }
-                
+
             }
             else
             {
@@ -157,9 +173,22 @@ public class Door : Interactable
                 lightUIG.SetActive(false);
                 lightUIR.SetActive(false);
             }
-            
+
 
         }
     }
+    // cooldown for close door after enemy open
+    public void AutoClose()
+    {
 
+        if (cddt > 0)
+        {
+            cddt -= Time.deltaTime;
+        }
+        if (cddt < 0)
+        {
+            cddt = 0;
+            Close();
+        }
+    }
 }

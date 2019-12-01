@@ -14,6 +14,9 @@ public class Interactable : MonoBehaviour
     // for item status UI
     public bool usable = true;
 
+    // monster door interaction
+    public bool enemyInrange;
+
     // This handles the triggers when the player goes near an interactable object
     // enable and disables UI
     // also highlights the object
@@ -40,6 +43,11 @@ public class Interactable : MonoBehaviour
             }
             
         }
+        if (collision.CompareTag("Monster") || collision.CompareTag("Nurse"))
+        {
+            enemyInrange = true;
+        }
+
     }
     // turn off glow if player not in range
     private void OnTriggerExit2D(Collider2D collision)
@@ -56,6 +64,10 @@ public class Interactable : MonoBehaviour
             
 
 
+        }
+        if (collision.CompareTag("Monster") || collision.CompareTag("Nurse"))
+        {
+            enemyInrange = false;
         }
     }
 }
