@@ -4,52 +4,75 @@ using UnityEngine;
 
 public class Breaker : Interactable
 {
-    public GameObject MapLighting;
-    public GameObject MainLights;
-
+    public GameObject[] MapLighting;
     private MonsterBrain monsterBrain;
 
-    void Start()
+    // blocked door
+    public float cooldown;
+    public float cooldownTimer;
+    // check status of the cooldown
+    public bool cdOn;
+    private void Start()
     {
+        cdOn = false;
         monsterBrain = GameObject.FindWithTag("Monster").GetComponent<MonsterBrain>();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
-            StartCoroutine(UseBreaker());
+            // set cooldowntimer and use breaker
+            cooldownTimer = cooldown;
+            if (!cdOn)
+            {
+                UseBreaker(0);
+            }
         }
+        CooldownTM();
     }
-    private IEnumerator UseBreaker()
+    public void UseBreaker(int n)
     {
-        // if (main lights are on)
-        //      turn it off
-        //      waitforseconds(2) 
-        //      backuplights on
-        // else if (main lights are off)
-        //      waitforseconds(5)
-        //      turn it on
-        //      turn off backup
-        if (MainLights.activeSelf)
+        // player = 0
+        // monster = 1
+
+        if (n == 0)
         {
-            MainLights.SetActive(false);
-            yield return new WaitForSeconds(2f);
-            MapLighting.SetActive(true);
+            cdOn = true;
+            foreach (GameObject light in MapLighting)
+            {
+                light.gameObject.SetActive(true);
+            }
         }
-        else
+        else if (n == 1)
         {
-            yield return new WaitForSeconds(3f);
-            MainLights.SetActive(true);
-            MapLighting.SetActive(false);
+            // set all lights to false
+            foreach (GameObject light in MapLighting)
+            {
+                light.gameObject.SetActive(false);
+            }
         }
+           
         monsterBrain.breakerOn = !monsterBrain.breakerOn;
     }
 
     public void SwitchBreaker()
     {
-        StartCoroutine(UseBreaker());
+        UseBreaker(1);
     }
 
+    public void CooldownTM()
+    {
+        // a cooldown timer once finnished set status cooldown good to be used again
+        if (cooldownTimer > 0)
+        {
+            cooldownTimer -= Time.deltaTime;
+        }
+        if (cooldownTimer < 0)
+        {
+            cooldownTimer = 0;
+            cdOn = false;
+        }
+    }
 }
