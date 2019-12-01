@@ -36,6 +36,10 @@ public class Breaker : Interactable
     {
         // player = 0
         // monster = 1
+        item.color = Color.red;
+        lightUIR.SetActive(true);
+        lightUIG.SetActive(false);
+        usable = false;
 
         if (n == 0)
         {
@@ -73,6 +77,9 @@ public class Breaker : Interactable
         {
             cooldownTimer = 0;
             cdOn = false;
+            item.color = Color.white;
+            lightUIR.SetActive(false);
+            usable = true;
         }
     }
 }

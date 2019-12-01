@@ -16,7 +16,6 @@ public class Door : Interactable
     public SpriteRenderer doorSprite;
     public BoxCollider2D physicsCollider;
     public Signal KeySignal;
-
     private MonsterBrain monsterBrain;
 
     // blocked door
@@ -28,6 +27,7 @@ public class Door : Interactable
 
     // for locked doors
     public Inventory playerInventory;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -44,6 +44,9 @@ public class Door : Interactable
             }
             else
             {
+                // for the main locked door that needs 3 keys to open
+                // when 3 keys are within player it removes all keys and turns door to normal
+                // and opens it 
                 if ((thisDoorType == DoorType.locked) && (playerInventory.Key == 3))
                 {
                     playerInventory.Key -= 3;
@@ -63,6 +66,9 @@ public class Door : Interactable
         {
             cooldownTimer = cooldown;
             doorSprite.color = Color.red;
+            lightUIR.SetActive(true);
+            lightUIG.SetActive(false);
+            usable = false;
             // if the door open to begin with
             if (isOpen)
             {
@@ -86,13 +92,17 @@ public class Door : Interactable
         {
             Close();
         }
+        // blocking door by monster make door unusable and glow red
         if (thisDoorType == DoorType.normal)
         {
             thisDoorType = DoorType.blocked;
+            usable = false;
+            doorSprite.color = Color.red;
+            lightUIR.SetActive(true);
             monsterBrain.blockedDoors++;
         }
     }
-
+    // open the door and set state to false also do animations and sound
     public void Open()
     {
         isOpen = true;
@@ -101,6 +111,7 @@ public class Door : Interactable
         GetComponent<DoorAudio>().PlaySound(transform.position, true);
         
     }
+    // close the door and set state to false also do animations and sound
     public void Close()
     {
         isOpen = false;
@@ -109,6 +120,9 @@ public class Door : Interactable
         GetComponent<DoorAudio>().PlaySound(transform.position, false);
     }
 
+    // cooldown for the blocked door
+    // counts down until 0 and then set door back to normal
+    // also highlights green if player in range
     public void BlockedDoorCooldown()
     { 
         
@@ -121,14 +135,27 @@ public class Door : Interactable
             cooldownTimer = 0;
             thisDoorType = DoorType.normal;
             monsterBrain.blockedDoors--;
-            
+            usable = true;
+            // for the UI interaction on what color to glow
             if (playerInRange)
             {
-                item.color = Color.green;
+                if (usable)
+                {
+                    item.color = Color.green;
+                    lightUIG.SetActive(true);
+                }
+                else
+                {
+                    item.color = Color.red;
+                    lightUIR.SetActive(true);
+                }
+                
             }
             else
             {
                 item.color = Color.white;
+                lightUIG.SetActive(false);
+                lightUIR.SetActive(false);
             }
             
 

@@ -8,17 +8,16 @@ public class Interactable : MonoBehaviour
     public Signal contextOff;
     public bool playerInRange;
     public SpriteRenderer item;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public GameObject lightUIG;
+    public GameObject lightUIR;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    // for item status UI
+    public bool usable = true;
+
+    // This handles the triggers when the player goes near an interactable object
+    // enable and disables UI
+    // also highlights the object
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -27,24 +26,36 @@ public class Interactable : MonoBehaviour
 
             contextOn.Raise();
             playerInRange = true;
-            if (item.color != Color.red)
+            // if item can be used glow green
+            if (usable)
             {
                 item.color = Color.green;
+                lightUIG.SetActive(true);
+            }
+            // if not usable glow red
+            if (!usable)
+            {
+                item.color = Color.red;
+                lightUIR.SetActive(true);
             }
             
         }
     }
+    // turn off glow if player not in range
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             contextOff.Raise();
             playerInRange = false;
-            if (item.color != Color.red)
+            if (usable)
             {
                 item.color = Color.white;
+                lightUIG.SetActive(false);
             }
             
+
+
         }
     }
 }
