@@ -19,10 +19,11 @@ public class PatrolAI : MonoBehaviour
     //Used by chase state
     public float chaseSpeed;        //The speed to chase the player
 
-    //Used for testing timer switch
+    //Used for chase timer
     private float gameTimer;
     private int seconds = 0;
     public int giveUpTime = 3; //How long the nurse will chase a player if the player has broken line of sight
+
     private string currentState;
 
     FovDetection fov;
@@ -74,7 +75,6 @@ public class PatrolAI : MonoBehaviour
             {
                 gameTimer = Time.time;
                 seconds++;
-                //Debug.Log(seconds);
             }
 
             if (seconds == giveUpTime)

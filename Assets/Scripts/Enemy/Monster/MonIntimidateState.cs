@@ -52,12 +52,10 @@ public class MonIntimidateState : State<MonsterAI>
         monsterBrain = GameObject.FindGameObjectWithTag("Monster").GetComponent<MonsterBrain>();
         playerRoom = monsterBrain.currentSector.playersRoom.GetComponent<Room>();
         moveSpots = playerRoom.moveSpots;
-
         index = 0;
 
-        //_owner.setTargetAsTransform(moveSpots[index]);
         _owner.target = moveSpots[index];
-        //Debug.Log(_owner.target);
+        
     }
 
     public override void ExitState(MonsterAI _owner)
@@ -72,12 +70,11 @@ public class MonIntimidateState : State<MonsterAI>
             if(index < moveSpots.Length)
             {
                 index++;
-                //_owner.setTargetAsTransform(moveSpots[index]);
-                _owner.target = moveSpots[index];
             } else
             {
                 _owner.GoToNextState();
             }
         }
+        _owner.target = moveSpots[index];
     }
 }

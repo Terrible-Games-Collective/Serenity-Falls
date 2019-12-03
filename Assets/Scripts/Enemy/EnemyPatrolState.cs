@@ -35,7 +35,6 @@ public class EnemyPatrolState : State<PatrolAI>
 
     public override void EnterState(PatrolAI _owner)
     {
-        //Debug.Log("Exiting Patrol State");
         _owner.target = _owner.moveSpots[_owner.destinationSpot];
         waitTimeCounter = _owner.waitTime; //resets the waitTime
         if(ai == null) {

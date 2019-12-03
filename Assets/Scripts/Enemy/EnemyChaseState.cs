@@ -37,8 +37,6 @@ public class EnemyChaseState : State<PatrolAI>
 
     public override void EnterState(PatrolAI _owner)
     {
-        Debug.Log("Entering Chase State");
-
         if (target == null)
         {
             //get target to chase based off of their tag
@@ -62,7 +60,6 @@ public class EnemyChaseState : State<PatrolAI>
     public override void UpdateState(PatrolAI _owner)
     {
             //update location based off of target position
-            //_owner.transform.position = Vector2.MoveTowards(_owner.transform.position, target.position, _owner.chaseSpeed * Time.deltaTime);
             _owner.target = target.transform;
 
     }

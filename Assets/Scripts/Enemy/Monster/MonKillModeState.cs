@@ -11,8 +11,11 @@ public class MonKillModeState : State<MonsterAI>
     private Transform target;
     //State Initialization ***************************
     private static MonKillModeState _instance;
-    private bool startedTimer;
-    private float startTime;
+
+    //Used for chase timer
+    private float gameTimer;
+    private int seconds = 0;
+    public int giveUpTime = 3; //How long the monster will chase a player if the player has broken line of sight
 
     private MonKillModeState()
     {
@@ -63,22 +66,32 @@ public class MonKillModeState : State<MonsterAI>
 
     public override void UpdateState(MonsterAI _owner)
     {
-        if (startedTimer)
+
+        if (!(_owner.GetFovDetection().IsInView()))
         {
-            if (_owner.GetFovDetection().IsInView())
+            if (Time.time > gameTimer + 1)
             {
-                startedTimer = false;
+                gameTimer = Time.time;
+                seconds++;
+                //Debug.Log(seconds);
             }
-            else if ((Time.unscaledTime - startTime) >= 3)
+
+            if (seconds == giveUpTime)
             {
+                seconds = 0;
+
+
                 _owner.ChangeState(MonsterAI.MonsterState.Intimidate);
             }
         }
-        if (!_owner.GetFovDetection().IsInView() && !startedTimer)
+        else
         {
-            startTime = Time.unscaledTime;
-            startedTimer = true;
+            seconds = 0;
         }
+
+       
+
+
         _owner.target = target.transform;
     }
 }
