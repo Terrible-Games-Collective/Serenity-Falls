@@ -73,14 +73,11 @@ public class MonKillModeState : State<MonsterAI>
             {
                 gameTimer = Time.time;
                 seconds++;
-                //Debug.Log(seconds);
             }
 
             if (seconds == giveUpTime)
             {
                 seconds = 0;
-
-
                 _owner.ChangeState(MonsterAI.MonsterState.Intimidate);
             }
         }
@@ -88,9 +85,6 @@ public class MonKillModeState : State<MonsterAI>
         {
             seconds = 0;
         }
-
-       
-
 
         _owner.target = target.transform;
     }

@@ -61,7 +61,6 @@ public class EnemyChaseState : State<PatrolAI>
     {
             //update location based off of target position
             _owner.target = target.transform;
-
     }
 
 }
