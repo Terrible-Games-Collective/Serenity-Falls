@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61930e16e81db5c43a4ecc22422a0953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 0.84551114, b: 0.3160377, a: 0.09803922}
+  Color: {r: 1, g: 0.5587921, b: 0, a: 0.41960785}
   Sprite: {fileID: 21300000, guid: 52a180b0dd7be744fb7ca1bebb0de29b, type: 3}
   SortingOrder: 0
   Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}
@@ -572,7 +572,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61930e16e81db5c43a4ecc22422a0953, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Color: {r: 1, g: 0.84551114, b: 0.3160377, a: 0.09803922}
+  Color: {r: 1, g: 0.5587921, b: 0, a: 0.41960785}
   Sprite: {fileID: 21300000, guid: 7214ba38ed456d7499541e6acac7868e, type: 3}
   SortingOrder: 0
   Material: {fileID: 2100000, guid: 5d8645bc2e5501a4ebd138db5aa609bd, type: 2}
