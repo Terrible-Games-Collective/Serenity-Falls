@@ -94,7 +94,7 @@ public class MonSpawnMinionState : State<MonsterAI>
 
         if (type == 0)
         {
-            MinionToSpawn = _owner.CornerGirlPrefab;
+            MinionToSpawn = _owner.CornerGhostPrefab;
         }
         else
         {

@@ -25,7 +25,7 @@ public class MonsterAI : MonoBehaviour
 
     private FovDetection fov;
 
-    public GameObject CornerGirlPrefab;
+    public GameObject CornerGhostPrefab;
     public GameObject ClownPrefab;
 
 
@@ -70,6 +70,7 @@ public class MonsterAI : MonoBehaviour
 
         if (fov.IsInView() && currentState != MonsterState.KillMode)
         {
+            FindObjectOfType<AudioManager>().Play("MonsterAttack");
             ChangeState(MonsterState.KillMode);
         }
         ai.destination = target.position;
