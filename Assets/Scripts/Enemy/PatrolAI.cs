@@ -65,6 +65,7 @@ public class PatrolAI : MonoBehaviour
 
         if (currentState != "chase" && fov.IsInView())
         {
+            FindObjectOfType<AudioManager>().Play("NurseAttack");
             currentState = "chase";
             ai.maxSpeed = chaseSpeed;
             stateMachine.ChangeState(EnemyChaseState.Instance);
