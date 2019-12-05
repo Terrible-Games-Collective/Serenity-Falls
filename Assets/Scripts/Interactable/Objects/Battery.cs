@@ -27,6 +27,7 @@ public class Battery : Interactable
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
+            FindObjectOfType<AudioManager>().Play("Pickup");
             GetBattery();
             upgradeFlashlight();
         }

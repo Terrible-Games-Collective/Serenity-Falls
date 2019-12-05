@@ -43,6 +43,7 @@ public class Breaker : Interactable
 
         if (n == 0)
         {
+            FindObjectOfType<AudioManager>().Play("Breaker");
             cdOn = true;
             foreach (GameObject light in MapLighting)
             {
@@ -51,6 +52,7 @@ public class Breaker : Interactable
         }
         else if (n == 1)
         {
+            FindObjectOfType<AudioManager>().Play("Breaker");
             // set all lights to false
             foreach (GameObject light in MapLighting)
             {

@@ -23,6 +23,7 @@ public class Key : Interactable
     {
         if (Input.GetKeyDown(KeyCode.E) && playerInRange)
         {
+            FindObjectOfType<AudioManager>().Play("Key");
             GetKey();
         }
     }
