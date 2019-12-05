@@ -29,7 +29,7 @@ public class PatrolAI : MonoBehaviour
     FovDetection fov;
     public IAstarAI ai;
 
-
+    public GameObject[] lights;
 
     public bool chasePlayer = false;//indicates which state is active
 
@@ -62,10 +62,15 @@ public class PatrolAI : MonoBehaviour
 
     private void Update()
     {
-
         if (currentState != "chase" && fov.IsInView())
         {
             FindObjectOfType<AudioManager>().Play("NurseAttack");
+
+            lights[0].SetActive(false);
+            lights[1].SetActive(false);
+            lights[2].SetActive(true);
+            lights[3].SetActive(true);
+
             currentState = "chase";
             ai.maxSpeed = chaseSpeed;
             stateMachine.ChangeState(EnemyChaseState.Instance);
@@ -81,7 +86,12 @@ public class PatrolAI : MonoBehaviour
             if (seconds == giveUpTime)
             {
                 seconds = 0;
-                
+
+                lights[0].SetActive(true);
+                lights[1].SetActive(true);
+                lights[2].SetActive(false);
+                lights[3].SetActive(false);
+
                 currentState = "patrol";
                 ai.maxSpeed = patrolSpeed;
                 stateMachine.ChangeState(EnemyPatrolState.Instance);
