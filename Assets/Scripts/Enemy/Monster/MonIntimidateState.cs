@@ -55,12 +55,12 @@ public class MonIntimidateState : State<MonsterAI>
         index = 0;
 
         _owner.target = moveSpots[index];
-        
+        _owner.PlayGiveUpSound();
     }
 
     public override void ExitState(MonsterAI _owner)
     {
-
+        _owner.PlayGiveUpSound();
     }
 
     public override void UpdateState(MonsterAI _owner)

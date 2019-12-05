@@ -200,6 +200,11 @@ public class MonsterAI : MonoBehaviour
 
     }
 
+    public void PlayGiveUpSound()
+    {
+        FindObjectOfType<AudioManager>().Play("MonsterGiveup");
+    }
+
     public void ChangeState(MonsterState nextState)
     {
         switch (nextState)
